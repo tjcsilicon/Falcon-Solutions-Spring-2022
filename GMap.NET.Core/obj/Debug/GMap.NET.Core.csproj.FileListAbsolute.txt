@@ -1,0 +1,15 @@
+C:\Users\Luis\Documents\1-A-WSU\class\cpts323\Aspring2021\project\greatmaps-master\GMap.NET.Core\bin\Debug\GMap.NET.Core.dll
+C:\Users\Luis\Documents\1-A-WSU\class\cpts323\Aspring2021\project\greatmaps-master\GMap.NET.Core\bin\Debug\GMap.NET.Core.pdb
+C:\Users\Luis\Documents\1-A-WSU\class\cpts323\Aspring2021\project\greatmaps-master\GMap.NET.Core\obj\Debug\GMap.NET.Properties.Resources.resources
+C:\Users\Luis\Documents\1-A-WSU\class\cpts323\Aspring2021\project\greatmaps-master\GMap.NET.Core\obj\Debug\GMap.NET.Core.csproj.GenerateResource.cache
+C:\Users\Luis\Documents\1-A-WSU\class\cpts323\Aspring2021\project\greatmaps-master\GMap.NET.Core\obj\Debug\GMap.NET.Core.csproj.CoreCompileInputs.cache
+C:\Users\Luis\Documents\1-A-WSU\class\cpts323\Aspring2021\project\greatmaps-master\GMap.NET.Core\obj\Debug\GMap.NET.Core.dll
+C:\Users\Luis\Documents\1-A-WSU\class\cpts323\Aspring2021\project\greatmaps-master\GMap.NET.Core\obj\Debug\GMap.NET.Core.pdb
+C:\GMAP\greatmaps-master-example\greatmaps-master\GMap.NET.Core\bin\Debug\GMap.NET.Core.dll
+C:\GMAP\greatmaps-master-example\greatmaps-master\GMap.NET.Core\bin\Debug\GMap.NET.Core.pdb
+C:\GMAP\greatmaps-master-example\greatmaps-master\GMap.NET.Core\obj\Debug\GMap.NET.Core.csproj.AssemblyReference.cache
+C:\GMAP\greatmaps-master-example\greatmaps-master\GMap.NET.Core\obj\Debug\GMap.NET.Properties.Resources.resources
+C:\GMAP\greatmaps-master-example\greatmaps-master\GMap.NET.Core\obj\Debug\GMap.NET.Core.csproj.GenerateResource.cache
+C:\GMAP\greatmaps-master-example\greatmaps-master\GMap.NET.Core\obj\Debug\GMap.NET.Core.csproj.CoreCompileInputs.cache
+C:\GMAP\greatmaps-master-example\greatmaps-master\GMap.NET.Core\obj\Debug\GMap.NET.Core.dll
+C:\GMAP\greatmaps-master-example\greatmaps-master\GMap.NET.Core\obj\Debug\GMap.NET.Core.pdb
