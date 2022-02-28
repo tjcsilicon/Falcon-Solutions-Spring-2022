@@ -86,9 +86,16 @@ namespace WindowsFormsApp1
             return false;
         }
 
+        double default_x = 46.32967;
+        double default_y = -119.26323;
+
         private void BeginButton_Click(object sender, EventArgs e)
         {
             UpdatePosition(_latitude, _longitude);
+            if(pos_x_field.Text == "" && pos_y_field.Text == "") {
+                _latitude = default_x;
+                _longitude = default_y;
+            }
             TestingFormApplication form = new TestingFormApplication(_latitude, _longitude);
             this.Hide();
             form.ShowDialog();

@@ -45,8 +45,8 @@
             this.gMapControl.LevelsKeepInMemmory = 5;
             this.gMapControl.Location = new System.Drawing.Point(45, 30);
             this.gMapControl.MarkersEnabled = true;
-            this.gMapControl.MaxZoom = 13;
-            this.gMapControl.MinZoom = 13;
+            this.gMapControl.MaxZoom = 15;
+            this.gMapControl.MinZoom = 15;
             this.gMapControl.MouseWheelZoomEnabled = true;
             this.gMapControl.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
             this.gMapControl.Name = "gMapControl";
