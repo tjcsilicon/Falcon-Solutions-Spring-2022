@@ -66,10 +66,20 @@ namespace WindowsFormsApp1
             _longitude = _y;
         }
 
-        private bool isDouble(string _s)
+        public static bool isDouble(string _s)
         {
             double test;
             if (Double.TryParse(_s, out test))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public static bool isInt(string _s)
+        {
+            int test;
+            if (Int32.TryParse(_s, out test))
             {
                 return true;
             }

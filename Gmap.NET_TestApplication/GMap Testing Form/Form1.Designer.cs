@@ -31,7 +31,8 @@
             this.gMapControl = new GMap.NET.WindowsForms.GMapControl();
             this.latitude_label = new System.Windows.Forms.Label();
             this.longitude_label = new System.Windows.Forms.Label();
-            this.cartesianChart1 = new LiveCharts.WinForms.CartesianChart();
+            this.data_graph = new LiveCharts.WinForms.CartesianChart();
+            this.add_series_button = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // gMapControl
@@ -78,20 +79,31 @@
             this.longitude_label.TabIndex = 4;
             this.longitude_label.Text = "label3";
             // 
-            // cartesianChart1
+            // data_graph
             // 
-            this.cartesianChart1.Location = new System.Drawing.Point(45, 402);
-            this.cartesianChart1.Name = "cartesianChart1";
-            this.cartesianChart1.Size = new System.Drawing.Size(600, 187);
-            this.cartesianChart1.TabIndex = 5;
-            this.cartesianChart1.Text = "cartesianChart1";
+            this.data_graph.Location = new System.Drawing.Point(45, 423);
+            this.data_graph.Name = "data_graph";
+            this.data_graph.Size = new System.Drawing.Size(600, 150);
+            this.data_graph.TabIndex = 5;
+            this.data_graph.Text = "cartesianChart1";
+            // 
+            // add_series_button
+            // 
+            this.add_series_button.Location = new System.Drawing.Point(5, 402);
+            this.add_series_button.Name = "add_series_button";
+            this.add_series_button.Size = new System.Drawing.Size(75, 23);
+            this.add_series_button.TabIndex = 6;
+            this.add_series_button.Text = "Add Series";
+            this.add_series_button.UseVisualStyleBackColor = true;
+            this.add_series_button.Click += new System.EventHandler(this.Add_series_button_Click);
             // 
             // TestingFormApplication
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(703, 601);
-            this.Controls.Add(this.cartesianChart1);
+            this.Controls.Add(this.add_series_button);
+            this.Controls.Add(this.data_graph);
             this.Controls.Add(this.longitude_label);
             this.Controls.Add(this.latitude_label);
             this.Controls.Add(this.gMapControl);
@@ -108,7 +120,8 @@
         private GMap.NET.WindowsForms.GMapControl gMapControl;
         private System.Windows.Forms.Label latitude_label;
         private System.Windows.Forms.Label longitude_label;
-        private LiveCharts.WinForms.CartesianChart cartesianChart1;
+        private LiveCharts.WinForms.CartesianChart data_graph;
+        private System.Windows.Forms.Button add_series_button;
     }
 }
 

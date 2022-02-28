@@ -33,3 +33,5 @@ C:\Users\tiefi\Desktop\cpts323\REPO\Falcon-Solutions-Spring-2022\Gmap.NET_TestAp
 C:\Users\tiefi\Desktop\cpts323\REPO\Falcon-Solutions-Spring-2022\Gmap.NET_TestApplication\GMap Testing Form\bin\Debug\LiveCharts.WinForms.xml
 C:\Users\tiefi\Desktop\cpts323\REPO\Falcon-Solutions-Spring-2022\Gmap.NET_TestApplication\GMap Testing Form\bin\Debug\LiveCharts.Wpf.pdb
 C:\Users\tiefi\Desktop\cpts323\REPO\Falcon-Solutions-Spring-2022\Gmap.NET_TestApplication\GMap Testing Form\bin\Debug\LiveCharts.Wpf.xml
+C:\Users\tiefi\Desktop\cpts323\REPO\Falcon-Solutions-Spring-2022\Gmap.NET_TestApplication\GMap Testing Form\obj\Debug\WindowsFormsApp1.csprojAssemblyReference.cache
+C:\Users\tiefi\Desktop\cpts323\REPO\Falcon-Solutions-Spring-2022\Gmap.NET_TestApplication\GMap Testing Form\obj\Debug\WindowsFormsApp1.Form2.resources
