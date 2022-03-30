@@ -12,6 +12,7 @@ using GMap.NET;
 using LiveCharts;
 using LiveCharts.Wpf;
 using Brushes = System.Windows.Media.Brushes;
+using Core;
 
 namespace WindowsFormsApp1
 {
@@ -25,6 +26,8 @@ namespace WindowsFormsApp1
             InitializeComponent();
             _latitude = _x;
             _longitude = _y;
+            PopulationHandler p = new PopulationHandler();
+            p.Test();
         }
 
         private void TestingFormApplication_Load(object sender, EventArgs e) {
