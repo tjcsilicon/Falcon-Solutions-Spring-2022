@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,6 +25,8 @@ namespace WindowsFormsApp1
         double _latitude; // latitude value for the gMap control
         double _longitude; // longitude value for the gMap control
 
+        Random rnd = new Random();
+
         PopulationHandler m_core = new PopulationHandler();
 
         public TestingFormApplication(double _x, double _y) {
@@ -33,6 +36,7 @@ namespace WindowsFormsApp1
             _latitude = _x;
             _longitude = _y;
             PopulateMap();
+            DrawConnections();
         }
 
         private void TestingFormApplication_Load(object sender, EventArgs e) {
@@ -163,6 +167,82 @@ namespace WindowsFormsApp1
             return value;
         }
 
+        int counter;
+        private void simulation_update_timer_Tick(object sender, EventArgs e)
+        {
+            if (counter > 10) { simulation_update_timer.Enabled = false; EndSimulation(); return; }
+            // generate a random value
+            
 
+            UpdateGraph(infected_series);
+            UpdateGraph(susceptable_series);
+            UpdateGraph(recovered_series);
+            //UpdateGraph(vaccinated_series);
+            counter++;
+        }
+
+        private void UpdateGraph(StackedAreaSeries m_series)
+        {
+            int value = rnd.Next(0, 10);
+            m_series.Values.Add(value);
+        }
+
+        StackedAreaSeries susceptable_series, infected_series, recovered_series, vaccinated_series = new StackedAreaSeries();
+
+        private void run_simulation_button_Click(object sender, EventArgs e)
+        {
+            BeginSimulation();
+            // for testing reasons, this button just populates the graph.
+            run_simulation_button.Enabled = false;
+            susceptable_series = new StackedAreaSeries() { DataLabels = true, Values = new ChartValues<int>(), Fill = System.Windows.Media.Brushes.Aqua };
+            infected_series = new StackedAreaSeries() { DataLabels = true, Values = new ChartValues<int>(), Fill = System.Windows.Media.Brushes.DarkRed };
+            recovered_series = new StackedAreaSeries() { DataLabels = true, Values = new ChartValues<int>(), Fill = System.Windows.Media.Brushes.BlueViolet };
+            vaccinated_series = new StackedAreaSeries() { DataLabels = true, Values = new ChartValues<int>(), Fill = System.Windows.Media.Brushes.LimeGreen };
+
+            data_graph.Series.Add(susceptable_series);
+            data_graph.Series.Add(infected_series);
+            data_graph.Series.Add(recovered_series);
+            data_graph.Series.Add(vaccinated_series);
+
+            Axis axis = new Axis() { Separator = new Separator() { Step = 1, IsEnabled = false } };
+            axis.Labels = new List<string>();
+
+            simulation_update_timer.Enabled = true;
+        }
+
+        private void DrawConnections()
+        {
+            /*GMapOverlay polyOverlay = new GMapOverlay("polygons");
+            foreach (KeyValuePair<int, Individual> m_individual in m_core.population_set)
+            {
+                Individual person = m_individual.Value;
+                foreach (Individual connection in person.connections)
+                {
+                    List<PointLatLng> points = new List<PointLatLng>();
+                    points.Add(new PointLatLng(_latitude - offsetToLatLng(person.pos_x), _longitude - offsetToLatLng(person.pos_y)));
+                    points.Add(new PointLatLng(_latitude - offsetToLatLng(connection.pos_x), _longitude - offsetToLatLng(connection.pos_y)));
+                    GMapPolygon polygon = new GMapPolygon(points, "mypolygon");
+                    polygon.Stroke = new System.Drawing.Pen(System.Drawing.Color.Red, 1);
+                    polyOverlay.Polygons.Add(polygon);
+
+                }
+            }
+            gMapControl.Overlays.Add(polyOverlay);*/
+        }
+
+        private void BeginSimulation()
+        {
+            Log("Simulation has began running!");
+        }
+
+        private void EndSimulation()
+        {
+            Log("Simulation has finished succesfully!");
+        }
+
+        public void Log(string message)
+        {
+            outputBox.Items.Add("$ " + message);
+        }
     }
 }
