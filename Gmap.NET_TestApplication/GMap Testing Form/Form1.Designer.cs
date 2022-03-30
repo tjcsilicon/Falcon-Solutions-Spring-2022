@@ -36,11 +36,15 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.individual_listbox = new System.Windows.Forms.ListBox();
+            this.individual_data = new System.Windows.Forms.GroupBox();
+            this.individual_data_name = new System.Windows.Forms.Label();
+            this.individual_data_status = new System.Windows.Forms.Label();
+            this.individual_data_connections = new System.Windows.Forms.ListBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.individual_data.SuspendLayout();
             this.SuspendLayout();
             // 
             // gMapControl
@@ -127,37 +131,66 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(1065, 605);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.Text = "Simulation";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.listBox1);
-            this.tabPage2.Controls.Add(this.groupBox1);
+            this.tabPage2.Controls.Add(this.individual_listbox);
+            this.tabPage2.Controls.Add(this.individual_data);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(1065, 605);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.Text = "Population Data";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // individual_listbox
             // 
-            this.groupBox1.Location = new System.Drawing.Point(757, 32);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 549);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
+            this.individual_listbox.FormattingEnabled = true;
+            this.individual_listbox.Location = new System.Drawing.Point(57, 36);
+            this.individual_listbox.Name = "individual_listbox";
+            this.individual_listbox.Size = new System.Drawing.Size(120, 537);
+            this.individual_listbox.TabIndex = 1;
+            this.individual_listbox.SelectedIndexChanged += new System.EventHandler(this.Individual_listbox_SelectedIndexChanged);
             // 
-            // listBox1
+            // individual_data
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(57, 36);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(120, 537);
-            this.listBox1.TabIndex = 1;
+            this.individual_data.Controls.Add(this.individual_data_connections);
+            this.individual_data.Controls.Add(this.individual_data_status);
+            this.individual_data.Controls.Add(this.individual_data_name);
+            this.individual_data.Location = new System.Drawing.Point(757, 32);
+            this.individual_data.Name = "individual_data";
+            this.individual_data.Size = new System.Drawing.Size(200, 549);
+            this.individual_data.TabIndex = 0;
+            this.individual_data.TabStop = false;
+            // 
+            // individual_data_name
+            // 
+            this.individual_data_name.AutoSize = true;
+            this.individual_data_name.Location = new System.Drawing.Point(7, 20);
+            this.individual_data_name.Name = "individual_data_name";
+            this.individual_data_name.Size = new System.Drawing.Size(35, 13);
+            this.individual_data_name.TabIndex = 0;
+            this.individual_data_name.Text = "label1";
+            // 
+            // individual_data_status
+            // 
+            this.individual_data_status.AutoSize = true;
+            this.individual_data_status.Location = new System.Drawing.Point(7, 67);
+            this.individual_data_status.Name = "individual_data_status";
+            this.individual_data_status.Size = new System.Drawing.Size(35, 13);
+            this.individual_data_status.TabIndex = 1;
+            this.individual_data_status.Text = "label2";
+            // 
+            // individual_data_connections
+            // 
+            this.individual_data_connections.FormattingEnabled = true;
+            this.individual_data_connections.Location = new System.Drawing.Point(9, 135);
+            this.individual_data_connections.Name = "individual_data_connections";
+            this.individual_data_connections.Size = new System.Drawing.Size(174, 147);
+            this.individual_data_connections.TabIndex = 4;
             // 
             // TestingFormApplication
             // 
@@ -172,6 +205,8 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.individual_data.ResumeLayout(false);
+            this.individual_data.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -186,8 +221,11 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ListBox individual_listbox;
+        private System.Windows.Forms.GroupBox individual_data;
+        private System.Windows.Forms.ListBox individual_data_connections;
+        private System.Windows.Forms.Label individual_data_status;
+        private System.Windows.Forms.Label individual_data_name;
     }
 }
 

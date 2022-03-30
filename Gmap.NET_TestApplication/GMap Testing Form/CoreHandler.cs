@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using System.IO;
 
 namespace Core
 {
@@ -8,6 +9,9 @@ namespace Core
 
     public class PopulationHandler
     {
+
+        public Dictionary<int, Individual> population_set = new Dictionary<int, Individual>();
+
         public SerializedIndividual CompressIndividual(Individual m_individual)
         {
             SerializedIndividual newIndividual = new SerializedIndividual();
@@ -83,39 +87,11 @@ namespace Core
             return json;
         }
 
-        public void Test()
+        public void GetDataset()
         {
-            PopulationHolder popHolder = new PopulationHolder();
-
-            SerializedIndividual p1 = new SerializedIndividual();
-            SerializedIndividual p2 = new SerializedIndividual();
-
-            p1.firstName = "bob";
-            p1.lastName = "jim";
-            p1.id = 0;
-            p1.status = 0;
-            p1.connections = new int[1];
-            p1.connections[0] = 1;
-            p1.weights = new float[1];
-            p1.weights[0] = 0.25f;
-
-            p2.firstName = "carl";
-            p2.lastName = "jim";
-            p1.id = 1;
-            p2.status = 1;
-            p2.connections = new int[2];
-            p2.connections[0] = 0;
-            p2.weights = new float[2];
-            p2.weights[0] = 0.1f;
-
-            popHolder.population = new SerializedIndividual[2];
-            popHolder.population[0] = p1;
-            popHolder.population[1] = p2;
-
-            string s = GetJSONFromPopulation(popHolder);
+            string s = System.IO.File.ReadAllText("../../testingPopulationSet.json");
             Console.WriteLine(s);
-            Dictionary<int, Individual> keyValuePairs = GetPopulationFromJSON(s);
-            Console.WriteLine("foo");
+            population_set = GetPopulationFromJSON(s);
         }
 
     }

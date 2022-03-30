@@ -1,0 +1,44 @@
+{
+    "population": [
+        {
+            "id": 0,
+            "firstName": "john",
+            "lastName": "doe",
+            "status": 0,
+            "pos_x": 1,
+            "pos_y": 3,
+            "connections": [1, 2],
+            "weights": [0.1, 0.5]
+        },
+        {
+            "id": 1,
+            "firstName": "jane",
+            "lastName": "doe",
+            "status": 0,
+            "pos_x": 6,
+            "pos_y": -2,
+            "connections": [0],
+            "weights": [0.8]
+        },
+        {
+            "id": 2,
+            "firstName": "bill",
+            "lastName": "bill",
+            "status": 1,
+            "pos_x": -1,
+            "pos_y": 3,
+            "connections": [0],
+            "weights": [0.1]
+        },
+        {
+            "id": 3,
+            "firstName": "gary",
+            "lastName": "lastname",
+            "status": 2,
+            "pos_x": -6,
+            "pos_y": 8,
+            "connections": [],
+            "weights": []
+        }
+    ]
+}
