@@ -44,6 +44,8 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.outputBox = new System.Windows.Forms.ListBox();
             this.simulation_update_timer = new System.Windows.Forms.Timer(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -73,7 +75,7 @@
             this.gMapControl.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
             this.gMapControl.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.gMapControl.ShowTileGridLines = false;
-            this.gMapControl.Size = new System.Drawing.Size(1042, 372);
+            this.gMapControl.Size = new System.Drawing.Size(602, 372);
             this.gMapControl.TabIndex = 0;
             this.gMapControl.Zoom = 0D;
             // 
@@ -81,7 +83,7 @@
             // 
             this.data_graph.Location = new System.Drawing.Point(6, 384);
             this.data_graph.Name = "data_graph";
-            this.data_graph.Size = new System.Drawing.Size(905, 215);
+            this.data_graph.Size = new System.Drawing.Size(602, 215);
             this.data_graph.TabIndex = 5;
             this.data_graph.Text = "cartesianChart1";
             // 
@@ -103,7 +105,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1073, 631);
+            this.tabControl1.Size = new System.Drawing.Size(735, 620);
             this.tabControl1.TabIndex = 7;
             // 
             // tabPage1
@@ -114,14 +116,14 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1065, 605);
+            this.tabPage1.Size = new System.Drawing.Size(727, 594);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Simulation";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // run_simulation_button
             // 
-            this.run_simulation_button.Location = new System.Drawing.Point(959, 408);
+            this.run_simulation_button.Location = new System.Drawing.Point(614, 6);
             this.run_simulation_button.Name = "run_simulation_button";
             this.run_simulation_button.Size = new System.Drawing.Size(75, 23);
             this.run_simulation_button.TabIndex = 7;
@@ -131,12 +133,13 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.label1);
             this.tabPage2.Controls.Add(this.individual_listbox);
             this.tabPage2.Controls.Add(this.individual_data);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1065, 605);
+            this.tabPage2.Size = new System.Drawing.Size(727, 594);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Population Data";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -144,55 +147,54 @@
             // individual_listbox
             // 
             this.individual_listbox.FormattingEnabled = true;
-            this.individual_listbox.Location = new System.Drawing.Point(57, 36);
+            this.individual_listbox.Location = new System.Drawing.Point(129, 45);
             this.individual_listbox.Name = "individual_listbox";
-            this.individual_listbox.Size = new System.Drawing.Size(120, 537);
+            this.individual_listbox.Size = new System.Drawing.Size(210, 498);
             this.individual_listbox.TabIndex = 1;
             this.individual_listbox.SelectedIndexChanged += new System.EventHandler(this.Individual_listbox_SelectedIndexChanged);
             // 
             // individual_data
             // 
+            this.individual_data.Controls.Add(this.label2);
             this.individual_data.Controls.Add(this.individual_data_connections);
             this.individual_data.Controls.Add(this.individual_data_status);
             this.individual_data.Controls.Add(this.individual_data_name);
-            this.individual_data.Location = new System.Drawing.Point(787, 36);
+            this.individual_data.Location = new System.Drawing.Point(372, 45);
             this.individual_data.Name = "individual_data";
-            this.individual_data.Size = new System.Drawing.Size(200, 549);
+            this.individual_data.Size = new System.Drawing.Size(200, 498);
             this.individual_data.TabIndex = 0;
             this.individual_data.TabStop = false;
             // 
             // individual_data_connections
             // 
             this.individual_data_connections.FormattingEnabled = true;
-            this.individual_data_connections.Location = new System.Drawing.Point(9, 135);
+            this.individual_data_connections.Location = new System.Drawing.Point(9, 96);
             this.individual_data_connections.Name = "individual_data_connections";
-            this.individual_data_connections.Size = new System.Drawing.Size(174, 147);
+            this.individual_data_connections.Size = new System.Drawing.Size(174, 381);
             this.individual_data_connections.TabIndex = 4;
             // 
             // individual_data_status
             // 
             this.individual_data_status.AutoSize = true;
-            this.individual_data_status.Location = new System.Drawing.Point(7, 67);
+            this.individual_data_status.Location = new System.Drawing.Point(6, 42);
             this.individual_data_status.Name = "individual_data_status";
-            this.individual_data_status.Size = new System.Drawing.Size(35, 13);
+            this.individual_data_status.Size = new System.Drawing.Size(0, 13);
             this.individual_data_status.TabIndex = 1;
-            this.individual_data_status.Text = "label2";
             // 
             // individual_data_name
             // 
             this.individual_data_name.AutoSize = true;
-            this.individual_data_name.Location = new System.Drawing.Point(7, 20);
+            this.individual_data_name.Location = new System.Drawing.Point(6, 16);
             this.individual_data_name.Name = "individual_data_name";
-            this.individual_data_name.Size = new System.Drawing.Size(35, 13);
+            this.individual_data_name.Size = new System.Drawing.Size(0, 13);
             this.individual_data_name.TabIndex = 0;
-            this.individual_data_name.Text = "label1";
             // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.outputBox);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1065, 605);
+            this.tabPage3.Size = new System.Drawing.Size(727, 594);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Log";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -200,28 +202,47 @@
             // outputBox
             // 
             this.outputBox.FormattingEnabled = true;
-            this.outputBox.Location = new System.Drawing.Point(4, 13);
+            this.outputBox.Location = new System.Drawing.Point(3, 3);
             this.outputBox.Name = "outputBox";
-            this.outputBox.Size = new System.Drawing.Size(1058, 576);
+            this.outputBox.Size = new System.Drawing.Size(721, 589);
             this.outputBox.TabIndex = 0;
             // 
             // simulation_update_timer
             // 
             this.simulation_update_timer.Tick += new System.EventHandler(this.simulation_update_timer_Tick);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(206, 26);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(57, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Population";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(32, 80);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(117, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Connections -- Weights";
+            // 
             // TestingFormApplication
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1097, 645);
+            this.ClientSize = new System.Drawing.Size(752, 645);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.add_series_button);
             this.Name = "TestingFormApplication";
-            this.Text = "GMap Test Form";
+            this.Text = "EISS";
             this.Load += new System.EventHandler(this.TestingFormApplication_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.individual_data.ResumeLayout(false);
             this.individual_data.PerformLayout();
             this.tabPage3.ResumeLayout(false);
@@ -246,6 +267,8 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.ListBox outputBox;
         private System.Windows.Forms.Timer simulation_update_timer;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }
 

@@ -176,7 +176,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.beginButton);
             this.Name = "SetInitialPosition";
-            this.Text = "SetInitialPosition";
+            this.Text = "Simulation Setup";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
