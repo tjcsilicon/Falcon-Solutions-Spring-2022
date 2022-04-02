@@ -28,178 +28,91 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label_1 = new System.Windows.Forms.Label();
-            this.pos_x_field = new System.Windows.Forms.TextBox();
-            this.pos_y_field = new System.Windows.Forms.TextBox();
-            this.Latitude_label = new System.Windows.Forms.Label();
-            this.long_label = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.beginButton = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // label_1
+            // beginButton
             // 
-            this.label_1.AutoSize = true;
-            this.label_1.Location = new System.Drawing.Point(100, 13);
-            this.label_1.Name = "label_1";
-            this.label_1.Size = new System.Drawing.Size(90, 13);
-            this.label_1.TabIndex = 0;
-            this.label_1.Text = "Set Initial Position";
+            this.beginButton.Location = new System.Drawing.Point(160, 180);
+            this.beginButton.Name = "beginButton";
+            this.beginButton.Size = new System.Drawing.Size(144, 23);
+            this.beginButton.TabIndex = 0;
+            this.beginButton.Text = "Login";
+            this.beginButton.UseVisualStyleBackColor = true;
+            this.beginButton.Click += new System.EventHandler(this.BeginButton_Click);
             // 
-            // pos_x_field
+            // textBox1
             // 
-            this.pos_x_field.Location = new System.Drawing.Point(153, 29);
-            this.pos_x_field.Name = "pos_x_field";
-            this.pos_x_field.Size = new System.Drawing.Size(136, 20);
-            this.pos_x_field.TabIndex = 1;
-            this.pos_x_field.TextChanged += new System.EventHandler(this.Pos_x_field_TextChanged);
+            this.textBox1.Location = new System.Drawing.Point(120, 107);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(230, 20);
+            this.textBox1.TabIndex = 0;
             // 
-            // pos_y_field
+            // maskedTextBox1
             // 
-            this.pos_y_field.Location = new System.Drawing.Point(153, 55);
-            this.pos_y_field.Name = "pos_y_field";
-            this.pos_y_field.Size = new System.Drawing.Size(136, 20);
-            this.pos_y_field.TabIndex = 2;
-            this.pos_y_field.TextChanged += new System.EventHandler(this.Pos_y_field_TextChanged);
-            // 
-            // Latitude_label
-            // 
-            this.Latitude_label.AutoSize = true;
-            this.Latitude_label.Location = new System.Drawing.Point(70, 32);
-            this.Latitude_label.Name = "Latitude_label";
-            this.Latitude_label.Size = new System.Drawing.Size(45, 13);
-            this.Latitude_label.TabIndex = 3;
-            this.Latitude_label.Text = "Latitude";
-            // 
-            // long_label
-            // 
-            this.long_label.AutoSize = true;
-            this.long_label.Location = new System.Drawing.Point(61, 58);
-            this.long_label.Name = "long_label";
-            this.long_label.Size = new System.Drawing.Size(54, 13);
-            this.long_label.TabIndex = 4;
-            this.long_label.Text = "Longitude";
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.panel2);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.checkBox1);
-            this.panel1.Controls.Add(this.numericUpDown1);
-            this.panel1.Location = new System.Drawing.Point(51, 23);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(357, 287);
-            this.panel1.TabIndex = 6;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 4);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(111, 13);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Simulation Parameters";
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.label_1);
-            this.panel2.Controls.Add(this.pos_x_field);
-            this.panel2.Controls.Add(this.long_label);
-            this.panel2.Controls.Add(this.pos_y_field);
-            this.panel2.Controls.Add(this.Latitude_label);
-            this.panel2.Location = new System.Drawing.Point(18, 153);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(303, 100);
-            this.panel2.TabIndex = 7;
+            this.maskedTextBox1.Location = new System.Drawing.Point(119, 154);
+            this.maskedTextBox1.Name = "maskedTextBox1";
+            this.maskedTextBox1.Size = new System.Drawing.Size(230, 20);
+            this.maskedTextBox1.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 83);
+            this.label1.Location = new System.Drawing.Point(207, 91);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 13);
+            this.label1.Size = new System.Drawing.Size(55, 13);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Vaccine Count";
+            this.label1.Text = "Username";
             // 
-            // checkBox1
+            // label2
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(18, 58);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(122, 17);
-            this.checkBox1.TabIndex = 3;
-            this.checkBox1.Text = "Display Connections";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(206, 138);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(53, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Password";
             // 
-            // numericUpDown1
+            // label3
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(98, 81);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDown1.TabIndex = 1;
-            // 
-            // beginButton
-            // 
-            this.beginButton.Location = new System.Drawing.Point(264, 316);
-            this.beginButton.Name = "beginButton";
-            this.beginButton.Size = new System.Drawing.Size(144, 23);
-            this.beginButton.TabIndex = 0;
-            this.beginButton.Text = "Run Simulation";
-            this.beginButton.UseVisualStyleBackColor = true;
-            this.beginButton.Click += new System.EventHandler(this.BeginButton_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(51, 317);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(133, 23);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "Fetch Dataset";
-            this.button2.UseVisualStyleBackColor = true;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(207, 9);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(67, 13);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "EISS LOGIN";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // SetInitialPosition
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(466, 378);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(466, 288);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.maskedTextBox1);
             this.Controls.Add(this.beginButton);
+            this.Controls.Add(this.textBox1);
             this.Name = "SetInitialPosition";
-            this.Text = "Simulation Setup";
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.Text = "EISS Login";
+            this.Load += new System.EventHandler(this.SetInitialPosition_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label_1;
-        private System.Windows.Forms.TextBox pos_x_field;
-        private System.Windows.Forms.TextBox pos_y_field;
-        private System.Windows.Forms.Label Latitude_label;
-        private System.Windows.Forms.Label long_label;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Button beginButton;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.MaskedTextBox maskedTextBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }

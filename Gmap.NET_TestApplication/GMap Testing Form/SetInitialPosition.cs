@@ -21,7 +21,7 @@ namespace WindowsFormsApp1
             InitializeComponent();
         }
 
-        private void Pos_x_field_TextChanged(object sender, EventArgs e)
+/*        private void Pos_x_field_TextChanged(object sender, EventArgs e)
         {
             string str = pos_x_field.Text;
             if (isDouble(str))
@@ -47,7 +47,7 @@ namespace WindowsFormsApp1
             {
                 beginButton.Enabled = false;
             }
-        }
+        }*/
 
         private void TestingFormApplication_Load(object sender, EventArgs e)
         {
@@ -92,14 +92,17 @@ namespace WindowsFormsApp1
         private void BeginButton_Click(object sender, EventArgs e)
         {
             UpdatePosition(_latitude, _longitude);
-            if(pos_x_field.Text == "" && pos_y_field.Text == "") {
-                _latitude = default_x;
-                _longitude = default_y;
-            }
+            _latitude = default_x;
+            _longitude = default_y;
             TestingFormApplication form = new TestingFormApplication(_latitude, _longitude);
             this.Hide();
             form.ShowDialog();
             this.Close();
+        }
+
+        private void SetInitialPosition_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
