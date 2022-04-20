@@ -13,9 +13,9 @@ using GMap.NET;
 using LiveCharts;
 using LiveCharts.Wpf;
 using Brushes = System.Windows.Media.Brushes;
-using Core;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
+using Firebase.Vaccination;
 
 namespace WindowsFormsApp1
 {
@@ -27,16 +27,15 @@ namespace WindowsFormsApp1
 
         Random rnd = new Random();
 
-        PopulationHandler m_core = new PopulationHandler();
 
         public TestingFormApplication(double _x, double _y) {
-            m_core.GetDataset();
-            InitializeComponent();
-            AddPopulationToDataset();
-            _latitude = _x;
-            _longitude = _y;
-            PopulateMap();
-            DrawConnections();
+            getData.Run().Wait();
+            //InitializeComponent();
+            //AddPopulationToDataset();
+            //_latitude = _x;
+            //_longitude = _y;
+            //PopulateMap();
+            //DrawConnections();
         }
 
         private void TestingFormApplication_Load(object sender, EventArgs e) {
@@ -52,23 +51,23 @@ namespace WindowsFormsApp1
         private void PopulateMap()
         {
             GMapOverlay markersOverlay = new GMapOverlay("markers");
-            foreach (KeyValuePair<int, Individual> individual in m_core.population_set)
+            foreach (Individual individual in getData.pop.individuals)
             {
 
                 Bitmap img = new Bitmap(64, 64);
-                switch(individual.Value.status)
+                switch(individual.status)
                 {
-                    case IndividualStatus.susceptable:
+                    case 0:
                         img = new Bitmap(WindowsFormsApp1.Properties.Resources.IndividualIcon_Susceptable_large, new Size(imgSize, imgSize));
                         break;
-                    case IndividualStatus.infected:
+                    case 1:
                         img = new Bitmap(WindowsFormsApp1.Properties.Resources.IndividualIcon_Infected_large, new Size(imgSize, imgSize));
                         break;
-                    case IndividualStatus.recovered:
+                    case -1:
                         img = new Bitmap(WindowsFormsApp1.Properties.Resources.IndividualIcon_Recovered_large, new Size(imgSize, imgSize));
                         break;
                 }
-                GMarkerGoogle marker = new GMarkerGoogle(new PointLatLng(_latitude + offsetToLatLng(individual.Value.pos_x), _longitude + offsetToLatLng(individual.Value.pos_x)),
+                GMarkerGoogle marker = new GMarkerGoogle(new PointLatLng(individual.lat, individual.lng),
                     img);
                 markersOverlay.Markers.Add(marker);
             }
@@ -76,10 +75,6 @@ namespace WindowsFormsApp1
         }
 
         private float offsetMultiplier = 0.001f;
-        public float offsetToLatLng(float offset)
-        {
-            return offset * offsetMultiplier;
-        }
 
         // Initialize the LiveChart Cartesian Chart
         private void InitializeChart() {
@@ -116,10 +111,9 @@ namespace WindowsFormsApp1
 
         private void AddPopulationToDataset()
         {
-            foreach(KeyValuePair<int, Individual> item in m_core.population_set)
+            foreach(Individual item in getData.pop.individuals)
             {
-                var m_individual = item.Value;
-                individual_listbox.Items.Add(m_individual.id + ": " + m_individual.lastName + ", " + m_individual.firstName);
+                individual_listbox.Items.Add(item.name);
             }
         }
 
@@ -127,27 +121,27 @@ namespace WindowsFormsApp1
         {
             // Get the currently selected item in the ListBox.
             int curItem = individual_listbox.SelectedIndex;
-            SetIndividualData(m_core.population_set[curItem]);
+            SetIndividualData(getData.pop.individuals[curItem]);
         }
 
         private void SetIndividualData(Individual m_data)
         {
             individual_data_connections.Items.Clear();
-            individual_data_name.Text = "Individual Name: " + m_data.firstName + " " + m_data.lastName;
+            individual_data_name.Text = "Individual Name: " + m_data.name;
 
             string status = "";
             System.Drawing.Color color = System.Drawing.Color.Black;
             switch(m_data.status)
             {
-                case IndividualStatus.susceptable:
+                case 0:
                     color = System.Drawing.Color.ForestGreen;
                     status = "SUSCEPTABLE";
                     break;
-                case IndividualStatus.infected:
+                case 1:
                     color = System.Drawing.Color.DarkRed;
                     status = "INFECTED";
                     break;
-                case IndividualStatus.recovered:
+                case -1:
                     color = System.Drawing.Color.BlueViolet;
                     status = "RECOVERED";
                     break;
@@ -155,15 +149,15 @@ namespace WindowsFormsApp1
             individual_data_status.ForeColor = color;
             individual_data_status.Text = status;
 
-            for(int i = 0; i < m_data.connections.Count; i++)
+            for(int i = 0; i < m_data.In.Length; i++)
             {
-                individual_data_connections.Items.Add(IndividualDataConnectionString(m_data.connections[i], m_data.weights[i]));
+                individual_data_connections.Items.Add(IndividualDataConnectionString(m_data, i));
             }
         }
 
-        private string IndividualDataConnectionString(Individual m_obj, float m_weight)
+        private string IndividualDataConnectionString(Individual m_obj, int i)
         {
-            string value = m_obj.firstName + " " + m_obj.lastName + "  ---- " + m_weight;
+            string value = m_obj.name + "  ---- " + m_obj.In[i].w;
             return value;
         }
 

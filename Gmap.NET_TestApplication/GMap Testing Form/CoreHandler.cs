@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.IO;
+using Firebase.Vaccination;
 
 namespace Core
 {
