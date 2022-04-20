@@ -36,16 +36,16 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.run_simulation_button = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label1 = new System.Windows.Forms.Label();
             this.individual_listbox = new System.Windows.Forms.ListBox();
             this.individual_data = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.individual_data_connections = new System.Windows.Forms.ListBox();
             this.individual_data_status = new System.Windows.Forms.Label();
             this.individual_data_name = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.outputBox = new System.Windows.Forms.ListBox();
             this.simulation_update_timer = new System.Windows.Forms.Timer(this.components);
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -64,7 +64,7 @@
             this.gMapControl.Location = new System.Drawing.Point(6, 6);
             this.gMapControl.MarkersEnabled = true;
             this.gMapControl.MaxZoom = 15;
-            this.gMapControl.MinZoom = 15;
+            this.gMapControl.MinZoom = 1;
             this.gMapControl.MouseWheelZoomEnabled = true;
             this.gMapControl.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
             this.gMapControl.Name = "gMapControl";
@@ -144,6 +144,15 @@
             this.tabPage2.Text = "Population Data";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(206, 26);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(57, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Population";
+            // 
             // individual_listbox
             // 
             this.individual_listbox.FormattingEnabled = true;
@@ -164,6 +173,15 @@
             this.individual_data.Size = new System.Drawing.Size(200, 498);
             this.individual_data.TabIndex = 0;
             this.individual_data.TabStop = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(32, 80);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(117, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Connections -- Weights";
             // 
             // individual_data_connections
             // 
@@ -210,24 +228,6 @@
             // simulation_update_timer
             // 
             this.simulation_update_timer.Tick += new System.EventHandler(this.simulation_update_timer_Tick);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(206, 26);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Population";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(32, 80);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(117, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Connections -- Weights";
             // 
             // TestingFormApplication
             // 

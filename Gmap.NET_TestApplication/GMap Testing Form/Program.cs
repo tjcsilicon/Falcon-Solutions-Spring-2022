@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Firebase.Vaccination;
 
 namespace WindowsFormsApp1
 {
@@ -16,7 +17,12 @@ namespace WindowsFormsApp1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SetInitialPosition());
+
+            // TODO Run an asynchronous function to check whether the visual simulation should begin or not
+
+            DataReader dataReader = new DataReader();
+            dataReader.Run().Wait();
+            Application.Run(new TestingFormApplication(dataReader));
         }
     }
 }

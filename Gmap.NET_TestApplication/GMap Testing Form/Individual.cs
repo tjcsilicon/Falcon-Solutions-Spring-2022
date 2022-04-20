@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -11,8 +11,8 @@ namespace Firebase.Vaccination
     using System;
     using System.Net.Http;
     using System.Reactive.Linq;
-    using System.Threading.Tasks;
-
+    using System.Threading.Tasks;*/
+    /*
     public class Population
     {
         public int K;
@@ -35,13 +35,15 @@ namespace Firebase.Vaccination
         public double w;
 
     }
+    */
 
+    /*
     public class getData
     {
         public static Population pop;
         public static async Task Run()
         {
-            //******************** Initialization ***************************//
+            //******************** Initialization ***************************//*
             var client = new FirebaseClient("https://heymotocarro-1a1d4.firebaseio.com/");
             HttpClient httpclient = new HttpClient();
 
@@ -53,10 +55,10 @@ namespace Firebase.Vaccination
                .Child("population")//Prospect list
                .OnceSingleAsync<Population>();
 
-            //******************** Get value K ***********************//
+            //******************** Get value K ***********************//*
             Console.WriteLine($"K: { pop.K}");
 
-            //******************** Get initial list of Prospect ***********************//
+            //******************** Get initial list of Prospect ***********************//*
             foreach (var person in pop.individuals)
             {
                 Console.WriteLine($"name:{ person.name}, { person.t} ");
@@ -67,7 +69,7 @@ namespace Firebase.Vaccination
             }
         }
     }
-}
+}*/
     //public void SetConnections(List<Individual> population, int[] connection_ids, float[] _weights)
     //{
     //    int population_size = population.Count;

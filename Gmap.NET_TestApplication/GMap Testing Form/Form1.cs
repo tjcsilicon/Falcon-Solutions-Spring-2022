@@ -22,21 +22,23 @@ namespace WindowsFormsApp1
     public partial class TestingFormApplication : Form
     {
 
-        double _latitude; // latitude value for the gMap control
-        double _longitude; // longitude value for the gMap control
+        double _latitude = 46.32967; // latitude value for the gMap control
+        double _longitude = -119.26323; // longitude value for the gMap control
 
+        DataReader dataReader;
         Random rnd = new Random();
+        Population pop;
 
-
-        public TestingFormApplication(double _x, double _y) {
-            getData.Run().Wait();
-            //InitializeComponent();
-            //AddPopulationToDataset();
-            //_latitude = _x;
-            //_longitude = _y;
-            //PopulateMap();
-            //DrawConnections();
+        public TestingFormApplication(DataReader dataset) {
+            //dataset.Run().Wait();
+            dataReader = dataset;
+            pop = dataReader.population_dataset;
+            InitializeComponent();
+            AddPopulationToDataset();
+            PopulateMap();
+            DrawConnections();
         }
+
 
         private void TestingFormApplication_Load(object sender, EventArgs e) {
             gMapControl.ShowCenter = false;
@@ -51,7 +53,7 @@ namespace WindowsFormsApp1
         private void PopulateMap()
         {
             GMapOverlay markersOverlay = new GMapOverlay("markers");
-            foreach (Individual individual in getData.pop.individuals)
+            foreach (Individual individual in pop.individuals)
             {
 
                 Bitmap img = new Bitmap(64, 64);
@@ -73,8 +75,6 @@ namespace WindowsFormsApp1
             }
             gMapControl.Overlays.Add(markersOverlay);
         }
-
-        private float offsetMultiplier = 0.001f;
 
         // Initialize the LiveChart Cartesian Chart
         private void InitializeChart() {
@@ -111,7 +111,7 @@ namespace WindowsFormsApp1
 
         private void AddPopulationToDataset()
         {
-            foreach(Individual item in getData.pop.individuals)
+            foreach(Individual item in pop.individuals)
             {
                 individual_listbox.Items.Add(item.name);
             }
@@ -121,7 +121,7 @@ namespace WindowsFormsApp1
         {
             // Get the currently selected item in the ListBox.
             int curItem = individual_listbox.SelectedIndex;
-            SetIndividualData(getData.pop.individuals[curItem]);
+            SetIndividualData(pop.individuals[curItem]);
         }
 
         private void SetIndividualData(Individual m_data)
@@ -206,11 +206,11 @@ namespace WindowsFormsApp1
 
         private void DrawConnections()
         {
-            /*GMapOverlay polyOverlay = new GMapOverlay("polygons");
-            foreach (KeyValuePair<int, Individual> m_individual in m_core.population_set)
+          /*  GMapOverlay polyOverlay = new GMapOverlay("polygons");
+            foreach (Individual m_individual in pop.individuals)
             {
                 Individual person = m_individual.Value;
-                foreach (Individual connection in person.connections)
+                foreach (Individual connection in m_individual)
                 {
                     List<PointLatLng> points = new List<PointLatLng>();
                     points.Add(new PointLatLng(_latitude - offsetToLatLng(person.pos_x), _longitude - offsetToLatLng(person.pos_y)));
