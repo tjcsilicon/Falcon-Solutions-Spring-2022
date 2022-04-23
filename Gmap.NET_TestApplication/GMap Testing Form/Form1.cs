@@ -19,18 +19,18 @@ using Firebase.Vaccination;
 
 namespace WindowsFormsApp1
 {
-    public partial class TestingFormApplication : Form
+    public partial class MainSimulation : Form
     {
 
         double _latitude = 46.32967; // latitude value for the gMap control
         double _longitude = -119.26323; // longitude value for the gMap control
 
         DataReader dataReader;
-        Random rnd = new Random();
+        Random rnd = new Random(); // can remove on publication
         Population pop;
         RunCheck server_check;
 
-        public TestingFormApplication(DataReader _dataset, ref RunCheck _check) {
+        public MainSimulation(DataReader _dataset, ref RunCheck _check) {
             //dataset.Run().Wait();
             dataReader = _dataset;
             server_check = _check;

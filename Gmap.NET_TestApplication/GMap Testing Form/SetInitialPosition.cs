@@ -98,7 +98,7 @@ namespace WindowsFormsApp1
             UpdatePosition(_latitude, _longitude);
        //     _latitude = default_x;
          //   _longitude = default_y;
-            TestingFormApplication form = new TestingFormApplication(data, ref running_task);
+            MainSimulation form = new MainSimulation(data, ref running_task);
             this.Hide();
             form.ShowDialog();
             this.Close();

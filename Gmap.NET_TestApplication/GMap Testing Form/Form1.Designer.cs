@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApp1
 {
-    partial class TestingFormApplication
+    partial class MainSimulation
     {
         /// <summary>
         /// Required designer variable.
@@ -229,14 +229,14 @@
             // 
             this.simulation_update_timer.Tick += new System.EventHandler(this.simulation_update_timer_Tick);
             // 
-            // TestingFormApplication
+            // MainSimulation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(752, 645);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.add_series_button);
-            this.Name = "TestingFormApplication";
+            this.Name = "MainSimulation";
             this.Text = "EISS";
             this.Load += new System.EventHandler(this.TestingFormApplication_Load);
             this.tabControl1.ResumeLayout(false);
