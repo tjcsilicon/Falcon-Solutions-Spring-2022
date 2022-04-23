@@ -22,7 +22,23 @@ namespace WindowsFormsApp1
 
             DataReader dataReader = new DataReader();
             dataReader.Run().Wait();
-            Application.Run(new TestingFormApplication(dataReader));
+            RunCheck check = new RunCheck();
+            Task.Run(() => check.Update());
+            Application.Run(new SetInitialPosition(dataReader, ref check));
+        }
+    }
+
+    public class RunCheck
+    {
+        public bool canStart = false;
+        public void Update()
+        {
+            bool isValidToStart = false;
+            do
+            {
+
+            } while (isValidToStart == false);
+            canStart = true;
         }
     }
 }

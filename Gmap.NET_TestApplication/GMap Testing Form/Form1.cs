@@ -28,10 +28,12 @@ namespace WindowsFormsApp1
         DataReader dataReader;
         Random rnd = new Random();
         Population pop;
+        RunCheck server_check;
 
-        public TestingFormApplication(DataReader dataset) {
+        public TestingFormApplication(DataReader _dataset, ref RunCheck _check) {
             //dataset.Run().Wait();
-            dataReader = dataset;
+            dataReader = _dataset;
+            server_check = _check;
             pop = dataReader.population_dataset;
             InitializeComponent();
             AddPopulationToDataset();
@@ -49,6 +51,7 @@ namespace WindowsFormsApp1
             InitializeChart();            
         }
 
+        // Populate the map with the icons representing individuals
         int imgSize = 32;
         private void PopulateMap()
         {
@@ -157,11 +160,13 @@ namespace WindowsFormsApp1
 
         private string IndividualDataConnectionString(Individual m_obj, int i)
         {
-            string value = m_obj.name + "  ---- " + m_obj.In[i].w;
+            string value = pop.individuals[m_obj.In[i].id].name + "  ---- " + m_obj.In[i].w;
             return value;
         }
 
         int counter;
+
+        // Update the UI
         private void simulation_update_timer_Tick(object sender, EventArgs e)
         {
             if (counter > 10) { simulation_update_timer.Enabled = false; EndSimulation(); return; }
@@ -183,6 +188,7 @@ namespace WindowsFormsApp1
 
         StackedAreaSeries susceptable_series, infected_series, recovered_series, vaccinated_series = new StackedAreaSeries();
 
+        // Testing only, run the dummy simulation
         private void run_simulation_button_Click(object sender, EventArgs e)
         {
             BeginSimulation();
@@ -204,25 +210,38 @@ namespace WindowsFormsApp1
             simulation_update_timer.Enabled = true;
         }
 
+        // Draw a line between each of the connections in the population
         private void DrawConnections()
         {
-          /*  GMapOverlay polyOverlay = new GMapOverlay("polygons");
+            GMapOverlay polyOverlay = new GMapOverlay("polygons");
             foreach (Individual m_individual in pop.individuals)
             {
-                Individual person = m_individual.Value;
-                foreach (Individual connection in m_individual)
+                int id = 0;
+                foreach (var connection in m_individual.In)
                 {
                     List<PointLatLng> points = new List<PointLatLng>();
-                    points.Add(new PointLatLng(_latitude - offsetToLatLng(person.pos_x), _longitude - offsetToLatLng(person.pos_y)));
-                    points.Add(new PointLatLng(_latitude - offsetToLatLng(connection.pos_x), _longitude - offsetToLatLng(connection.pos_y)));
+                    points.Add(new PointLatLng(m_individual.lat, m_individual.lng));
+                    points.Add(new PointLatLng(pop.individuals[connection.id].lat, pop.individuals[connection.id].lng));
                     GMapPolygon polygon = new GMapPolygon(points, "mypolygon");
-                    polygon.Stroke = new System.Drawing.Pen(System.Drawing.Color.Red, 1);
+                    polygon.Stroke = new System.Drawing.Pen(System.Drawing.Color.Red, 0.5f);
                     polyOverlay.Polygons.Add(polygon);
+                    id++;
 
                 }
             }
-            gMapControl.Overlays.Add(polyOverlay);*/
+            gMapControl.Overlays.Add(polyOverlay);
         }
+
+      /*  private System.Drawing.Color GetColorOfLine(int person_a, int id)
+        {
+            if(pop.individuals[person_a].In[id].infectTrigger)
+            {
+                return System.Drawing.Color.Red;
+            } else
+            {
+                return new Color(0.5f, 100, 100, 100);
+            }
+        }*/
 
         private void BeginSimulation()
         {

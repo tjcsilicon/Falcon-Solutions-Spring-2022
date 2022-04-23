@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Firebase.Vaccination;
 
 namespace WindowsFormsApp1
 {
@@ -16,8 +17,14 @@ namespace WindowsFormsApp1
         private double _latitude;
         private double _longitude;
 
-        public SetInitialPosition()
+        DataReader data;
+        RunCheck running_task;
+
+        public SetInitialPosition(DataReader r, ref RunCheck task)
         {
+            data = r;
+            running_task = task;
+
             InitializeComponent();
         }
 
@@ -91,9 +98,9 @@ namespace WindowsFormsApp1
             UpdatePosition(_latitude, _longitude);
        //     _latitude = default_x;
          //   _longitude = default_y;
-            //TestingFormApplication form = new TestingFormApplication(_latitude, _longitude);
+            TestingFormApplication form = new TestingFormApplication(data, ref running_task);
             this.Hide();
-            //form.ShowDialog();
+            form.ShowDialog();
             this.Close();
         }
 
