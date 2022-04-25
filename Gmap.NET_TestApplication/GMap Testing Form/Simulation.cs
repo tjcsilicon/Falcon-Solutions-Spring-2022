@@ -24,21 +24,32 @@ class Simulation
 
     public void Run()
     {
-        pop.infected = tempList;
-        tempList = new List<Individual>();
-        //int a = 0;
+        tempList = new List<Individual>(pop.infected);
+        //tempList = pop.infected;
+        int a = 0;
         //bool done = false;
         //while (true)
         //{
+        if (pop.infected.Count != 0)
+        {
             foreach (Individual i in pop.infected)
             {
+                i.recovery--;
+                if (i.recovery == 0)
+                {
+                    i.isRecovered = true;
+                    tempList.Remove(i);
+                } else 
                 foreach (int o in i.Out)
                 {
                     isInfected(o);
                 }
+                a++;
             }
+        }
 
             main.Update(); //write this function: Should reload the map updating all changed statuses.
+            pop.infected = tempList;
         //    a++;
         //    if (a > 25) done = true;
         //    if (done) //change to infected list
@@ -51,17 +62,8 @@ class Simulation
 
     public void isInfected(int id)
     {
-        if (pop.individuals[id].status == 1)
-        {
-            pop.individuals[id].recovery--;
-            if(pop.individuals[id].recovery == 0)
-            {
-                pop.individuals[id].isRecovered = true;
-                tempList.Remove(pop.individuals[id]);
-            }
-            return;
-        }
         double thresh = 0;
+        if (pop.individuals[id].status == 1) return;
         foreach (Neighbor n in pop.individuals[id].In)
         {
             if (!pop.individuals[n.id].isVaccinated || !pop.individuals[n.id].isRecovered) //test if they're vaccinated OR recovered
