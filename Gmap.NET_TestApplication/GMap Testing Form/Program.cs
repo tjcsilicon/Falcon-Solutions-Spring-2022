@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Firebase.Vaccination;
+using Firebase.Login;
 
 namespace WindowsFormsApp1
 {
@@ -19,12 +20,14 @@ namespace WindowsFormsApp1
             Application.SetCompatibleTextRenderingDefault(false);
 
             // TODO Run an asynchronous function to check whether the visual simulation should begin or not
-
+            Login verification = new Login();
             DataReader dataReader = new DataReader();
-            dataReader.Run().Wait();
             RunCheck check = new RunCheck();
+            //dataReader.Run().Wait();
+            //Task.Run(() => verification.HandleLogin().Wait());
+            Task.Run(() => dataReader.Run().Wait());
             Task.Run(() => check.Update());
-            Application.Run(new SetInitialPosition(dataReader, ref check));
+            Application.Run(new LoginScreen(dataReader, verification, ref check));
         }
     }
 

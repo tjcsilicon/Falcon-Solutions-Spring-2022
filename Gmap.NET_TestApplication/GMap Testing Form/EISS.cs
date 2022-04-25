@@ -26,8 +26,8 @@ namespace WindowsFormsApp1
     public partial class MainSimulation : Form
     {
 
-        double _latitude = 46.32967; // latitude value for the gMap control
-        double _longitude = -119.2632; // longitude value for the gMap control
+        double _latitude = 46.277807; // latitude value for the gMap control
+        double _longitude = -119.274558; // longitude value for the gMap control
 
         DataReader dataReader;
         Random rnd = new Random(); // can remove on publication
@@ -40,12 +40,22 @@ namespace WindowsFormsApp1
             server_check = _check;
             pop = dataReader.population_dataset;
             InitializeComponent();
+            Log("UI Components have been initialized");
             AddPopulationToDataset();
+            Log("Population has been imported into the system");
             PopulateMap();
-            
+            Log("GMap Interface has been populated with nodes");
             DrawConnections();
+            Log("Gmap interface Nodes have had connections drawn");
         }
 
+        public int[] recipients;
+        public int virusStart;
+
+        public void HandleVaccines()
+        {
+            VaccinationAssessment vaccinationAssessment = new VaccinationAssessment(pop);
+        }
 
         private void TestingFormApplication_Load(object sender, EventArgs e) {
             gMapControl.ShowCenter = false;
@@ -53,7 +63,8 @@ namespace WindowsFormsApp1
             GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
             gMapControl.Zoom = 13;
             gMapControl.Position = new GMap.NET.PointLatLng(_latitude, _longitude);
-            InitializeChart();            
+            InitializeChart();
+            Log("EISS initialized");
         }
 
         // Populate the map with the icons representing individuals
@@ -186,6 +197,11 @@ namespace WindowsFormsApp1
             counter++;
         }
 
+        public IEnumerator e()
+        {
+            yield return new 
+        }
+
         private void UpdateGraph(StackedAreaSeries m_series)
         {
             int value = rnd.Next(0, 10);
@@ -256,6 +272,11 @@ namespace WindowsFormsApp1
                 return DColor.FromArgb(100, 37, 70, 74);
                 
             }
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void BeginSimulation()

@@ -63,10 +63,10 @@
             this.gMapControl.LevelsKeepInMemmory = 5;
             this.gMapControl.Location = new System.Drawing.Point(6, 6);
             this.gMapControl.MarkersEnabled = true;
-            this.gMapControl.MaxZoom = 15;
-            this.gMapControl.MinZoom = 1;
+            this.gMapControl.MaxZoom = 14;
+            this.gMapControl.MinZoom = 14;
             this.gMapControl.MouseWheelZoomEnabled = true;
-            this.gMapControl.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
+            this.gMapControl.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.ViewCenter;
             this.gMapControl.Name = "gMapControl";
             this.gMapControl.NegativeMode = false;
             this.gMapControl.PolygonsEnabled = true;
@@ -74,16 +74,16 @@
             this.gMapControl.RoutesEnabled = true;
             this.gMapControl.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
             this.gMapControl.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
-            this.gMapControl.ShowTileGridLines = false;
-            this.gMapControl.Size = new System.Drawing.Size(602, 372);
+            this.gMapControl.ShowTileGridLines = true;
+            this.gMapControl.Size = new System.Drawing.Size(1668, 696);
             this.gMapControl.TabIndex = 0;
-            this.gMapControl.Zoom = 0D;
+            this.gMapControl.Zoom = 14D;
             // 
             // data_graph
             // 
-            this.data_graph.Location = new System.Drawing.Point(6, 384);
+            this.data_graph.Location = new System.Drawing.Point(6, 708);
             this.data_graph.Name = "data_graph";
-            this.data_graph.Size = new System.Drawing.Size(602, 215);
+            this.data_graph.Size = new System.Drawing.Size(1392, 259);
             this.data_graph.TabIndex = 5;
             this.data_graph.Text = "cartesianChart1";
             // 
@@ -105,7 +105,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(735, 620);
+            this.tabControl1.Size = new System.Drawing.Size(1710, 999);
             this.tabControl1.TabIndex = 7;
             // 
             // tabPage1
@@ -116,14 +116,15 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(727, 594);
+            this.tabPage1.Size = new System.Drawing.Size(1702, 973);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Simulation";
             this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
             // run_simulation_button
             // 
-            this.run_simulation_button.Location = new System.Drawing.Point(614, 6);
+            this.run_simulation_button.Location = new System.Drawing.Point(1514, 912);
             this.run_simulation_button.Name = "run_simulation_button";
             this.run_simulation_button.Size = new System.Drawing.Size(75, 23);
             this.run_simulation_button.TabIndex = 7;
@@ -233,7 +234,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(752, 645);
+            this.ClientSize = new System.Drawing.Size(1734, 1013);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.add_series_button);
             this.Name = "MainSimulation";

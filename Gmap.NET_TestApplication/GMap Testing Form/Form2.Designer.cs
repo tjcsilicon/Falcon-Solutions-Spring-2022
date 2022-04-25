@@ -56,7 +56,6 @@
             this.value_box.Name = "value_box";
             this.value_box.Size = new System.Drawing.Size(100, 20);
             this.value_box.TabIndex = 0;
-            this.value_box.TextChanged += new System.EventHandler(this.Value_box_TextChanged);
             // 
             // label
             // 

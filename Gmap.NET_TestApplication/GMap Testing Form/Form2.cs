@@ -22,18 +22,6 @@ namespace WindowsFormsApp1
 
         public List<int> intList = new List<int>();
 
-        private void Value_box_TextChanged(object sender, EventArgs e)
-        {
-            string s = value_box.Text;
-            if (SetInitialPosition.isInt(s))
-            {
-                add_value_button.Enabled = true;
-            } else
-            {
-                add_value_button.Enabled = false;
-            }
-        }
-
         void AddValue(int value)
         {
             intList.Add(value);
