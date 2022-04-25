@@ -17,13 +17,17 @@ using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
 using Firebase.Vaccination;
 
+using MColor = System.Windows.Media.Color;
+using DColor = System.Drawing.Color;
+
+
 namespace WindowsFormsApp1
 {
     public partial class MainSimulation : Form
     {
 
         double _latitude = 46.32967; // latitude value for the gMap control
-        double _longitude = -119.26323; // longitude value for the gMap control
+        double _longitude = -119.2632; // longitude value for the gMap control
 
         DataReader dataReader;
         Random rnd = new Random(); // can remove on publication
@@ -38,6 +42,7 @@ namespace WindowsFormsApp1
             InitializeComponent();
             AddPopulationToDataset();
             PopulateMap();
+            
             DrawConnections();
         }
 
@@ -166,16 +171,17 @@ namespace WindowsFormsApp1
 
         int counter;
 
-        // Update the UI
+        // Update the UI|| Change to be called from thread in simulation class
         private void simulation_update_timer_Tick(object sender, EventArgs e)
         {
             if (counter > 10) { simulation_update_timer.Enabled = false; EndSimulation(); return; }
             // generate a random value
-            
 
+          //  gMapControl.Overlays.Remove(polyOverlay);
             UpdateGraph(infected_series);
             UpdateGraph(susceptable_series);
             UpdateGraph(recovered_series);
+            DrawConnections();
             //UpdateGraph(vaccinated_series);
             counter++;
         }
@@ -210,10 +216,14 @@ namespace WindowsFormsApp1
             simulation_update_timer.Enabled = true;
         }
 
+        GMapOverlay polyOverlay = new GMapOverlay("polygons");
+
         // Draw a line between each of the connections in the population
         private void DrawConnections()
         {
-            GMapOverlay polyOverlay = new GMapOverlay("polygons");
+            gMapControl.Overlays.Remove(polyOverlay);
+            polyOverlay.Clear();
+            int indv = 0;
             foreach (Individual m_individual in pop.individuals)
             {
                 int id = 0;
@@ -223,25 +233,30 @@ namespace WindowsFormsApp1
                     points.Add(new PointLatLng(m_individual.lat, m_individual.lng));
                     points.Add(new PointLatLng(pop.individuals[connection.id].lat, pop.individuals[connection.id].lng));
                     GMapPolygon polygon = new GMapPolygon(points, "mypolygon");
-                    polygon.Stroke = new System.Drawing.Pen(System.Drawing.Color.Red, 0.5f);
+
+                    DColor color = GetColorOfLine(indv, id);
+
+                    polygon.Stroke = new System.Drawing.Pen(color, 0.5f);
                     polyOverlay.Polygons.Add(polygon);
                     id++;
 
                 }
+                indv++;
             }
             gMapControl.Overlays.Add(polyOverlay);
         }
 
-      /*  private System.Drawing.Color GetColorOfLine(int person_a, int id)
+        private System.Drawing.Color GetColorOfLine(int person_a, int id)
         {
             if(pop.individuals[person_a].In[id].infectTrigger)
             {
                 return System.Drawing.Color.Red;
             } else
             {
-                return new Color(0.5f, 100, 100, 100);
+                return DColor.FromArgb(100, 37, 70, 74);
+                
             }
-        }*/
+        }
 
         private void BeginSimulation()
         {

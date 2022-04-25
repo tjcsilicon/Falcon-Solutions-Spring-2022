@@ -156,6 +156,8 @@
     <Compile Include="SetInitialPosition.Designer.cs">
       <DependentUpon>SetInitialPosition.cs</DependentUpon>
     </Compile>
+    <Compile Include="Simulation.cs" />
+    <Compile Include="VaccinationAssessment.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
