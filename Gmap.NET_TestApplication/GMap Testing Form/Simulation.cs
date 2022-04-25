@@ -10,11 +10,44 @@ class Simulation
     public Population pop;
 
     // Constructor for Simulation; pass in a reference to the population variable
-    public Simulation( ref Population population)
+    public Simulation(ref Population population)
     {
         pop = population;
+        bool done = false;
+        while (true)
+        {
+            foreach (Individual i in pop.individuals)
+            {
+                if (i.status == 1)
+                {
+                    foreach (int o in i.Out)
+                    {
+                        isInfected(o);
+                    }
+                }
+            }
+            //WindowsForms1.update(); //write this function: Should reload the map updating all changed statuses.
+            if (done) //change to infected list
+            {
+                break;
+            }
+        }
     }
 
-
-
+    public void isInfected(int id)
+    {
+        double thresh = 0;
+        foreach (Neighbor n in pop.individuals[id].In)
+        {
+            if (pop.individuals[n.id].status != -1) //test if they're vaccinated
+            {
+                thresh += n.w * pop.individuals[n.id].status;
+            }
+        }
+        if (thresh > pop.individuals[id].t)
+        {
+            pop.individuals[id].status = 1;
+        }
+    }
 }
+
