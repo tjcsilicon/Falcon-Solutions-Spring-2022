@@ -73,7 +73,11 @@ namespace Firebase.Vaccination
             {
 
                 Bitmap img = new Bitmap(64, 64);
-                switch (individual.status)
+                int v = 0;
+                if (individual.status == 1) v = 1;
+                if (individual.isRecovered) v = 2;
+                if (individual.isVaccinated) v = 3;
+                switch (v)
                 {
                     case 0:
                         img = new Bitmap(WindowsFormsApp1.Properties.Resources.IndividualIcon_Susceptable_large, new Size(imgSize, imgSize));
@@ -81,7 +85,7 @@ namespace Firebase.Vaccination
                     case 1:
                         img = new Bitmap(WindowsFormsApp1.Properties.Resources.IndividualIcon_Infected_large, new Size(imgSize, imgSize));
                         break;
-                    case -1:
+                    case 2:
                         img = new Bitmap(WindowsFormsApp1.Properties.Resources.IndividualIcon_Recovered_large, new Size(imgSize, imgSize));
                         break;
                 }
