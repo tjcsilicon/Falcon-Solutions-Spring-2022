@@ -10,7 +10,7 @@ class Simulation
     public Population pop;
 
     // Constructor for Simulation; pass in a reference to the population variable
-    public Simulation(ref Population population, ref WindowsFormsApp1.MainSimulation mainSim)
+    public Simulation(ref Population population, ref UiUpdate update)
     {
         pop = population;
         bool done = false;
@@ -24,7 +24,7 @@ class Simulation
                 }
             }
 
-            mainSim.Update(); //write this function: Should reload the map updating all changed statuses.
+            update.Update(); //write this function: Should reload the map updating all changed statuses.
 
             if (done) //change to infected list
             {
