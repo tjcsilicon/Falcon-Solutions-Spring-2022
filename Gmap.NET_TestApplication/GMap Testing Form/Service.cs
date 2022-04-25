@@ -7,6 +7,7 @@
         public int K;
         public Individual[] individuals { get; set; }
         public List<int> selected = new List<int>();
+        public List<Individual> infected = new List<Individual>();
     }
     public class Individual
     {
