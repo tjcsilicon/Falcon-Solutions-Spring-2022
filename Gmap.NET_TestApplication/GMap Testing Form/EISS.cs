@@ -197,10 +197,6 @@ namespace WindowsFormsApp1
             counter++;
         }
 
-        public IEnumerator e()
-        {
-            yield return new 
-        }
 
         private void UpdateGraph(StackedAreaSeries m_series)
         {
