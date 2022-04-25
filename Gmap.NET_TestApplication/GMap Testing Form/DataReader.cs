@@ -8,9 +8,11 @@
     using System.Reactive.Linq;
     using System.Threading.Tasks;
 
+
     public class DataReader
     {
         public Population population_dataset;
+
         public async Task Run()
         {
             //******************** Initialization ***************************//
@@ -40,7 +42,13 @@
 
             }
 
-
+            foreach(var person in PopulationData.individuals)
+            {
+                if (person.status == 1)
+                {
+                    PopulationData.infected.Add(person);
+                }
+            }
            
             population_dataset = PopulationData;
         }
