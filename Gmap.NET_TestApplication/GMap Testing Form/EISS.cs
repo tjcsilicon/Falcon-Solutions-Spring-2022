@@ -44,7 +44,7 @@ namespace WindowsFormsApp1
         // The list of individuals who will start with the infection, derived from population and passed to the simulation
         public int[] virusStart;
 
-
+        Simulation simulation;
 
 
         // Constructor
@@ -54,6 +54,7 @@ namespace WindowsFormsApp1
             server_check = _check;
             pop = dataReader.population_dataset;
             InitializeComponent();
+
             Log("UI Components have been initialized");
             AddPopulationToDataset();
             Log("Population has been imported into the system");
@@ -75,11 +76,7 @@ namespace WindowsFormsApp1
             //recipients = vaccinationAssessment.selection;
         }
 
-        public void HandleSimulation()
-        {
-            UiUpdate update = new UiUpdate(gMapControl, pop);
-            Simulation simulation = new Simulation(ref pop, update);
-        }
+        UiUpdate update;
     
 
         //////////////////////////////////////////////////////////////
@@ -89,10 +86,13 @@ namespace WindowsFormsApp1
         private void OnLoad(object sender, EventArgs e) {
             gMapControl.ShowCenter = false;
             gMapControl.MapProvider = GMap.NET.MapProviders.GoogleMapProvider.Instance;
+            gMapControl.ShowTileGridLines = false;
             GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
             gMapControl.Zoom = 13;
             gMapControl.Position = new GMap.NET.PointLatLng(_latitude, _longitude);
             Log("EISS initialized");
+            update = new UiUpdate(ref gMapControl, ref pop, data_graph);
+            update.Initialize();
         }
 
         private void OnListboxSelect(object sender, EventArgs e)
@@ -116,7 +116,7 @@ namespace WindowsFormsApp1
             //HandleMapConnections();
             //HandleGraph();
             //UpdateGraph(vaccinated_series);
-            
+            simulation.Run();            
             counter++;
         }
 
@@ -205,6 +205,7 @@ namespace WindowsFormsApp1
     
         private void BeginSimulation()
         {
+            simulation = new Simulation(ref pop, update);
             Log("Simulation has began running!");
         }
 

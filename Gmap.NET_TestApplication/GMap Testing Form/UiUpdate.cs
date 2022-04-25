@@ -9,16 +9,33 @@ using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
 using MColor = System.Windows.Media.Color;
 using DColor = System.Drawing.Color;
+using LiveCharts;
 using LiveCharts.Wpf;
 
 namespace Firebase.Vaccination
 {
     public class UiUpdate
     {
-        public UiUpdate (GMapControl control, Population p)
+        public UiUpdate (ref GMapControl control, ref Population p, LiveCharts.WinForms.CartesianChart chart)
         {
             gMap = control;
             pop = p;
+            data_graph = chart;
+        }
+
+        public void Initialize()
+        {
+            HandleMapConnections();
+            HandleMapPopulation();
+            susceptable_series = new StackedAreaSeries() { DataLabels = true, Values = new ChartValues<int>(), Fill = System.Windows.Media.Brushes.Aqua };
+            infected_series = new StackedAreaSeries() { DataLabels = true, Values = new ChartValues<int>(), Fill = System.Windows.Media.Brushes.DarkRed };
+            recovered_series = new StackedAreaSeries() { DataLabels = true, Values = new ChartValues<int>(), Fill = System.Windows.Media.Brushes.BlueViolet };
+            vaccinated_series = new StackedAreaSeries() { DataLabels = true, Values = new ChartValues<int>(), Fill = System.Windows.Media.Brushes.LimeGreen };
+            data_graph.Series.Add(susceptable_series);
+            data_graph.Series.Add(infected_series);
+            data_graph.Series.Add(recovered_series);
+            data_graph.Series.Add(vaccinated_series);
+            Refresh();
         }
 
         // The overlay used to display lines on the gMap control
@@ -26,24 +43,32 @@ namespace Firebase.Vaccination
 
         GMapControl gMap;
         Population pop;
+        LiveCharts.WinForms.CartesianChart data_graph;
 
         // Size in pixel the icons will display in the map
         int imgSize = 32;
 
-
+        void Refresh()
+        {
+            gMap.Refresh();
+            gMap.Zoom = gMap.Zoom * -1; // I don't know why but this fixes the issue
+            gMap.Zoom = gMap.Zoom * -1;
+        }
 
         // The main Update function of the program. It is called every time the simulation ends a cycle
         public void Update()
         {
+            gMap.Overlays.Clear();
             HandleMapPopulation();
             HandleMapConnections();
-            HandleGraph();
+            Task.Run(() => HandleGraph());
+            Refresh();
         }
 
+        GMapOverlay markersOverlay = new GMapOverlay("markers");
         // Called on Update(), updates the nodes in the gMap control
         private void HandleMapPopulation()
         {
-            GMapOverlay markersOverlay = new GMapOverlay("markers");
             foreach (Individual individual in pop.individuals)
             {
 
@@ -70,7 +95,6 @@ namespace Firebase.Vaccination
         // Called on Update(), updates the lines connecting nodes in the gMap control
         private void HandleMapConnections()
         {
-            gMap.Overlays.Remove(polyOverlay);
             polyOverlay.Clear();
             int indv = 0;
             foreach (Individual m_individual in pop.individuals)
@@ -119,7 +143,10 @@ namespace Firebase.Vaccination
         }
 
         // The different StackedAreaSeries for the different types of status afflictions for the population
-        StackedAreaSeries susceptable_series, infected_series, recovered_series, vaccinated_series = new StackedAreaSeries();
+        StackedAreaSeries susceptable_series = new StackedAreaSeries(),
+            infected_series = new StackedAreaSeries(),
+            recovered_series = new StackedAreaSeries(),
+            vaccinated_series = new StackedAreaSeries();
 
         private System.Drawing.Color GetColorOfLine(int person_a, int id)
         {

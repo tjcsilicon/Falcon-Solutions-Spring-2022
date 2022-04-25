@@ -138,7 +138,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(727, 594);
+            this.tabPage2.Size = new System.Drawing.Size(1702, 973);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Population Data";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -211,7 +211,7 @@
             this.tabPage3.Controls.Add(this.outputBox);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(727, 594);
+            this.tabPage3.Size = new System.Drawing.Size(1702, 973);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Log";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -226,6 +226,7 @@
             // 
             // simulation_update_timer
             // 
+            this.simulation_update_timer.Interval = 1000;
             this.simulation_update_timer.Tick += new System.EventHandler(this.OnDummyTimer);
             // 
             // MainSimulation

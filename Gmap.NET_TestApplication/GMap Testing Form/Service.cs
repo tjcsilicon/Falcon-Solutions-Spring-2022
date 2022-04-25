@@ -20,6 +20,7 @@
         public int status = 0;
         public bool isVaccinated;
         public bool isRecovered;
+        public int recovery = 4;
 
     }
     public class Neighbor
