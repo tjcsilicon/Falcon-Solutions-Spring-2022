@@ -158,6 +158,7 @@
       <DependentUpon>LoginScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="Simulation.cs" />
+    <Compile Include="UiUpdate.cs" />
     <Compile Include="VaccinationAssessment.cs" />
     <EmbeddedResource Include="EISS.resx">
       <DependentUpon>EISS.cs</DependentUpon>
