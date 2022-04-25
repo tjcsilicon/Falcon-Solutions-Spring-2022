@@ -1,13 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GMap.NET;
+using GMap.NET.WindowsForms;
+using GMap.NET.WindowsForms.Markers;
+using MColor = System.Windows.Media.Color;
+using DColor = System.Drawing.Color;
+using LiveCharts.Wpf;
 
 namespace Firebase.Vaccination
 {
     public class UiUpdate
     {
+        public UiUpdate (GMapControl control, Population p)
+        {
+            gMap = control;
+            pop = p;
+        }
+
+        // The overlay used to display lines on the gMap control
+        GMapOverlay polyOverlay = new GMapOverlay("polygons");
+
+        GMapControl gMap;
+        Population pop;
+
+        // Size in pixel the icons will display in the map
+        int imgSize = 32;
+
+
+
         // The main Update function of the program. It is called every time the simulation ends a cycle
         public void Update()
         {
@@ -40,13 +64,13 @@ namespace Firebase.Vaccination
                     img);
                 markersOverlay.Markers.Add(marker);
             }
-            gMapControl.Overlays.Add(markersOverlay);
+            gMap.Overlays.Add(markersOverlay);
         }
 
         // Called on Update(), updates the lines connecting nodes in the gMap control
         private void HandleMapConnections()
         {
-            gMapControl.Overlays.Remove(polyOverlay);
+            gMap.Overlays.Remove(polyOverlay);
             polyOverlay.Clear();
             int indv = 0;
             foreach (Individual m_individual in pop.individuals)
@@ -68,7 +92,7 @@ namespace Firebase.Vaccination
                 }
                 indv++;
             }
-            gMapControl.Overlays.Add(polyOverlay);
+            gMap.Overlays.Add(polyOverlay);
         }
 
         public void HandleGraph()
@@ -93,5 +117,29 @@ namespace Firebase.Vaccination
             UpdateGraph(recovered_series, rec);
             UpdateGraph(vaccinated_series, vac);
         }
+
+        // The different StackedAreaSeries for the different types of status afflictions for the population
+        StackedAreaSeries susceptable_series, infected_series, recovered_series, vaccinated_series = new StackedAreaSeries();
+
+        private System.Drawing.Color GetColorOfLine(int person_a, int id)
+        {
+            if (pop.individuals[person_a].In[id].infectTrigger)
+            {
+                return System.Drawing.Color.Red;
+            }
+            else
+            {
+                return DColor.FromArgb(100, 37, 70, 74);
+
+            }
+        }
+
+        private void UpdateGraph(StackedAreaSeries m_series, int value)
+        {
+            //int value = rnd.Next(0, 10);
+            m_series.Values.Add(value);
+        }
     }
+
+
 }

@@ -28,10 +28,6 @@ namespace WindowsFormsApp1
 
         double _latitude = 46.277807; // latitude value for the gMap control
         double _longitude = -119.274558; // longitude value for the gMap control
-
-        // Size in pixel the icons will display in the map
-        int imgSize = 32;
-
         //////////// Firebase Datasets ////////////
         /// Population Database
         DataReader dataReader;
@@ -48,11 +44,7 @@ namespace WindowsFormsApp1
         // The list of individuals who will start with the infection, derived from population and passed to the simulation
         public int[] virusStart;
 
-        // The overlay used to display lines on the gMap control
-        GMapOverlay polyOverlay = new GMapOverlay("polygons");
 
-        // The different StackedAreaSeries for the different types of status afflictions for the population
-        StackedAreaSeries susceptable_series, infected_series, recovered_series, vaccinated_series = new StackedAreaSeries();
 
 
         // Constructor
@@ -65,9 +57,9 @@ namespace WindowsFormsApp1
             Log("UI Components have been initialized");
             AddPopulationToDataset();
             Log("Population has been imported into the system");
-            HandleMapPopulation();
+            //HandleMapPopulation();
             Log("GMap Interface has been populated with nodes");
-            HandleMapConnections();
+            //HandleMapConnections();
             Log("Gmap interface Nodes have had connections drawn");
             
         }
@@ -85,7 +77,7 @@ namespace WindowsFormsApp1
 
         public void HandleSimulation()
         {
-            Simulation simulation = new Simulation(ref pop, ref );
+            Simulation simulation = new Simulation(ref pop);
         }
     
 
@@ -120,8 +112,8 @@ namespace WindowsFormsApp1
             //UpdateGraph(infected_series);
             //UpdateGraph(susceptable_series);
             //UpdateGraph(recovered_series);
-            HandleMapConnections();
-            HandleGraph();
+            //HandleMapConnections();
+            //HandleGraph();
             //UpdateGraph(vaccinated_series);
             
             counter++;
@@ -185,11 +177,7 @@ namespace WindowsFormsApp1
             return value;
         }
 
-        private void UpdateGraph(StackedAreaSeries m_series, int value)
-        {
-            //int value = rnd.Next(0, 10);
-            m_series.Values.Add(value);
-        }
+
 
         
         // Testing only, run the dummy simulation
@@ -198,12 +186,12 @@ namespace WindowsFormsApp1
             BeginSimulation();
             // for testing reasons, this button just populates the graph.
             run_simulation_button.Enabled = false;
-            susceptable_series = new StackedAreaSeries() { DataLabels = true, Values = new ChartValues<int>(), Fill = System.Windows.Media.Brushes.Aqua };
-            infected_series = new StackedAreaSeries() { DataLabels = true, Values = new ChartValues<int>(), Fill = System.Windows.Media.Brushes.DarkRed };
-            recovered_series = new StackedAreaSeries() { DataLabels = true, Values = new ChartValues<int>(), Fill = System.Windows.Media.Brushes.BlueViolet };
-            vaccinated_series = new StackedAreaSeries() { DataLabels = true, Values = new ChartValues<int>(), Fill = System.Windows.Media.Brushes.LimeGreen };
+            //susceptable_series = new StackedAreaSeries() { DataLabels = true, Values = new ChartValues<int>(), Fill = System.Windows.Media.Brushes.Aqua };
+            //infected_series = new StackedAreaSeries() { DataLabels = true, Values = new ChartValues<int>(), Fill = System.Windows.Media.Brushes.DarkRed };
+            //recovered_series = new StackedAreaSeries() { DataLabels = true, Values = new ChartValues<int>(), Fill = System.Windows.Media.Brushes.BlueViolet };
+            //vaccinated_series = new StackedAreaSeries() { DataLabels = true, Values = new ChartValues<int>(), Fill = System.Windows.Media.Brushes.LimeGreen };
 
-            data_graph.Series.Add(susceptable_series);
+            //data_graph.Series.Add(susceptable_series);
             data_graph.Series.Add(infected_series);
             data_graph.Series.Add(recovered_series);
             data_graph.Series.Add(vaccinated_series);
@@ -214,19 +202,6 @@ namespace WindowsFormsApp1
             simulation_update_timer.Enabled = true;
         }
     
-
-        private System.Drawing.Color GetColorOfLine(int person_a, int id)
-        {
-            if(pop.individuals[person_a].In[id].infectTrigger)
-            {
-                return System.Drawing.Color.Red;
-            } else
-            {
-                return DColor.FromArgb(100, 37, 70, 74);
-                
-            }
-        }
-
         private void BeginSimulation()
         {
             Log("Simulation has began running!");
