@@ -77,7 +77,8 @@ namespace WindowsFormsApp1
 
         public void HandleSimulation()
         {
-            Simulation simulation = new Simulation(ref pop);
+            UiUpdate update = new UiUpdate(gMapControl, pop);
+            Simulation simulation = new Simulation(ref pop, update);
         }
     
 
@@ -192,9 +193,9 @@ namespace WindowsFormsApp1
             //vaccinated_series = new StackedAreaSeries() { DataLabels = true, Values = new ChartValues<int>(), Fill = System.Windows.Media.Brushes.LimeGreen };
 
             //data_graph.Series.Add(susceptable_series);
-            data_graph.Series.Add(infected_series);
-            data_graph.Series.Add(recovered_series);
-            data_graph.Series.Add(vaccinated_series);
+            //data_graph.Series.Add(infected_series);
+            //data_graph.Series.Add(recovered_series);
+            //data_graph.Series.Add(vaccinated_series);
 
             Axis axis = new Axis() { Separator = new Separator() { Step = 1, IsEnabled = false } };
             axis.Labels = new List<string>();
