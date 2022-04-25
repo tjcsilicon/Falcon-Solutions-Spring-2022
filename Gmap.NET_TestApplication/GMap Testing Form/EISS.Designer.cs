@@ -95,7 +95,6 @@
             this.add_series_button.TabIndex = 6;
             this.add_series_button.Text = "Add Series";
             this.add_series_button.UseVisualStyleBackColor = true;
-            this.add_series_button.Click += new System.EventHandler(this.Add_series_button_Click);
             // 
             // tabControl1
             // 
@@ -120,7 +119,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Simulation";
             this.tabPage1.UseVisualStyleBackColor = true;
-            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
             // run_simulation_button
             // 
@@ -161,7 +159,7 @@
             this.individual_listbox.Name = "individual_listbox";
             this.individual_listbox.Size = new System.Drawing.Size(210, 498);
             this.individual_listbox.TabIndex = 1;
-            this.individual_listbox.SelectedIndexChanged += new System.EventHandler(this.Individual_listbox_SelectedIndexChanged);
+            this.individual_listbox.SelectedIndexChanged += new System.EventHandler(this.OnListboxSelect);
             // 
             // individual_data
             // 
@@ -228,7 +226,7 @@
             // 
             // simulation_update_timer
             // 
-            this.simulation_update_timer.Tick += new System.EventHandler(this.simulation_update_timer_Tick);
+            this.simulation_update_timer.Tick += new System.EventHandler(this.OnDummyTimer);
             // 
             // MainSimulation
             // 
@@ -239,7 +237,7 @@
             this.Controls.Add(this.add_series_button);
             this.Name = "MainSimulation";
             this.Text = "EISS";
-            this.Load += new System.EventHandler(this.TestingFormApplication_Load);
+            this.Load += new System.EventHandler(this.OnLoad);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);

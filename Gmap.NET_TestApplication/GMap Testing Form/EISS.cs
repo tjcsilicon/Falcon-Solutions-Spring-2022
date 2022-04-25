@@ -29,11 +29,33 @@ namespace WindowsFormsApp1
         double _latitude = 46.277807; // latitude value for the gMap control
         double _longitude = -119.274558; // longitude value for the gMap control
 
-        DataReader dataReader;
-        Random rnd = new Random(); // can remove on publication
-        Population pop;
-        RunCheck server_check;
+        // Size in pixel the icons will display in the map
+        int imgSize = 32;
 
+        //////////// Firebase Datasets ////////////
+        /// Population Database
+        DataReader dataReader;
+        /// Firebase Listener
+        RunCheck server_check;
+        ///////////////////////////////////////////
+
+        // The overall population variable
+        Population pop;
+
+        // The list of vaccine recipients determined by the Vaccination Assessment class
+        public int[] recipients;
+
+        // The list of individuals who will start with the infection, derived from population and passed to the simulation
+        public int[] virusStart;
+
+        // The overlay used to display lines on the gMap control
+        GMapOverlay polyOverlay = new GMapOverlay("polygons");
+
+        // The different StackedAreaSeries for the different types of status afflictions for the population
+        StackedAreaSeries susceptable_series, infected_series, recovered_series, vaccinated_series = new StackedAreaSeries();
+
+
+        // Constructor
         public MainSimulation(DataReader _dataset, ref RunCheck _check) {
             //dataset.Run().Wait();
             dataReader = _dataset;
@@ -43,40 +65,43 @@ namespace WindowsFormsApp1
             Log("UI Components have been initialized");
             AddPopulationToDataset();
             Log("Population has been imported into the system");
-            PopulateMap();
+            HandleMapPopulation();
             Log("GMap Interface has been populated with nodes");
-            DrawConnections();
+            HandleMapConnections();
             Log("Gmap interface Nodes have had connections drawn");
+            
         }
 
-        public int[] recipients;
-        public int virusStart;
+        // The main Update function of the program. It is called every time the simulation ends a cycle
+        public void Update()
+        {
 
+            HandleMapPopulation();
+            HandleMapConnections();
+            HandleGraph();
+        }
+
+
+        //////////////////////////////////////////////////////////////
+        ///// Handler Functions /////
+        //////////////////////////////////////////////////////////////
+        
+        // Called on initialization, sets the best fit individuals for vaccines
         public void HandleVaccines()
         {
             VaccinationAssessment vaccinationAssessment = new VaccinationAssessment(pop);
+            //recipients = vaccinationAssessment.selection;
         }
 
-        private void TestingFormApplication_Load(object sender, EventArgs e) {
-            gMapControl.ShowCenter = false;
-            gMapControl.MapProvider = GMap.NET.MapProviders.GoogleMapProvider.Instance;
-            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
-            gMapControl.Zoom = 13;
-            gMapControl.Position = new GMap.NET.PointLatLng(_latitude, _longitude);
-            InitializeChart();
-            Log("EISS initialized");
-        }
-
-        // Populate the map with the icons representing individuals
-        int imgSize = 32;
-        private void PopulateMap()
+        // Called on Update(), updates the nodes in the gMap control
+        private void HandleMapPopulation()
         {
             GMapOverlay markersOverlay = new GMapOverlay("markers");
             foreach (Individual individual in pop.individuals)
             {
 
                 Bitmap img = new Bitmap(64, 64);
-                switch(individual.status)
+                switch (individual.status)
                 {
                     case 0:
                         img = new Bitmap(WindowsFormsApp1.Properties.Resources.IndividualIcon_Susceptable_large, new Size(imgSize, imgSize));
@@ -95,39 +120,101 @@ namespace WindowsFormsApp1
             gMapControl.Overlays.Add(markersOverlay);
         }
 
-        // Initialize the LiveChart Cartesian Chart
-        private void InitializeChart() {
-            //StackedAreaSeries series = new StackedAreaSeries() { DataLabels = true, Values = new ChartValues<int>()};
-            //Axis axis = new Axis() { Separator = new Separator() { Step = 1, IsEnabled = false } };
-            //axis.Labels = new List<string>();
-
-            //series.Values.Add(3);
-            //series.Values.Add(4);
-
-            //data_graph.Series.Add(series);
-        }
-
-        private void Add_series_button_Click(object sender, EventArgs e)
+        // Called on Update(), updates the lines connecting nodes in the gMap control
+        private void HandleMapConnections()
         {
-            var form = new Form2();
-            var success = form.ShowDialog();
-            if(success == DialogResult.OK)
+            gMapControl.Overlays.Remove(polyOverlay);
+            polyOverlay.Clear();
+            int indv = 0;
+            foreach (Individual m_individual in pop.individuals)
             {
-                List<int> list = form.ReturnValue;
-
-                StackedAreaSeries series = new StackedAreaSeries() { DataLabels = true, Values = new ChartValues<int>() };
-                Axis axis = new Axis() { Separator = new Separator() { Step = 1, IsEnabled = false } };
-                axis.Labels = new List<string>();
-
-                foreach(int i in list)
+                int id = 0;
+                foreach (var connection in m_individual.In)
                 {
-                    series.Values.Add(i);
-                }
+                    List<PointLatLng> points = new List<PointLatLng>();
+                    points.Add(new PointLatLng(m_individual.lat, m_individual.lng));
+                    points.Add(new PointLatLng(pop.individuals[connection.id].lat, pop.individuals[connection.id].lng));
+                    GMapPolygon polygon = new GMapPolygon(points, "mypolygon");
 
-                data_graph.Series.Add(series);
+                    DColor color = GetColorOfLine(indv, id);
+
+                    polygon.Stroke = new System.Drawing.Pen(color, 0.5f);
+                    polyOverlay.Polygons.Add(polygon);
+                    id++;
+
+                }
+                indv++;
             }
+            gMapControl.Overlays.Add(polyOverlay);
         }
 
+        public void HandleGraph()
+        {
+            int sus = 0, inf = 0, rec = 0, vac = 0;
+            foreach(Individual m in pop.individuals)
+            {
+                if (m.isVaccinated) { vac++; continue; }
+                if (m.isRecovered) { rec++; continue; }
+                switch(m.status)
+                {
+                    case 0:
+                        sus++;
+                        break;
+                    case 1:
+                        inf++;
+                        break;
+                }
+            }
+            UpdateGraph(infected_series, inf);
+            UpdateGraph(susceptable_series, sus);
+            UpdateGraph(recovered_series, rec);
+            UpdateGraph(vaccinated_series, vac);
+        }
+
+        //////////////////////////////////////////////////////////////
+        ///// UI Event Functions /////
+        //////////////////////////////////////////////////////////////
+
+        private void OnLoad(object sender, EventArgs e) {
+            gMapControl.ShowCenter = false;
+            gMapControl.MapProvider = GMap.NET.MapProviders.GoogleMapProvider.Instance;
+            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
+            gMapControl.Zoom = 13;
+            gMapControl.Position = new GMap.NET.PointLatLng(_latitude, _longitude);
+            Log("EISS initialized");
+        }
+
+        private void OnListboxSelect(object sender, EventArgs e)
+        {
+            // Get the currently selected item in the ListBox.
+            int curItem = individual_listbox.SelectedIndex;
+            SetIndividualData(pop.individuals[curItem]);
+        }
+
+        // Update the UI|| Change to be called from thread in simulation class
+        int counter;
+        private void OnDummyTimer(object sender, EventArgs e)
+        {
+            if (counter > 10) { simulation_update_timer.Enabled = false; EndSimulation(); return; }
+            // generate a random value
+
+            //  gMapControl.Overlays.Remove(polyOverlay);
+            //UpdateGraph(infected_series);
+            //UpdateGraph(susceptable_series);
+            //UpdateGraph(recovered_series);
+            HandleMapConnections();
+            HandleGraph();
+            //UpdateGraph(vaccinated_series);
+            
+            counter++;
+        }
+
+
+        //////////////////////////////////////////////////////////////
+        ///// Helper Functions /////
+        //////////////////////////////////////////////////////////////
+
+        // Adds each individual to the listbox containing each individual
         private void AddPopulationToDataset()
         {
             foreach(Individual item in pop.individuals)
@@ -136,13 +223,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        private void Individual_listbox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // Get the currently selected item in the ListBox.
-            int curItem = individual_listbox.SelectedIndex;
-            SetIndividualData(pop.individuals[curItem]);
-        }
-
+        // Adds into the textbox all the connections the current individual has, as well as their name and infection status
         private void SetIndividualData(Individual m_data)
         {
             individual_data_connections.Items.Clear();
@@ -174,38 +255,25 @@ namespace WindowsFormsApp1
             }
         }
 
+        /// <summary>
+        /// Returns a string showing the connected individual and their weight value
+        /// </summary>
+        /// <param name="Main Individual"></param>
+        /// <param name="Connected Individual's ID"></param>
+        /// <returns></returns>
         private string IndividualDataConnectionString(Individual m_obj, int i)
         {
             string value = pop.individuals[m_obj.In[i].id].name + "  ---- " + m_obj.In[i].w;
             return value;
         }
 
-        int counter;
-
-        // Update the UI|| Change to be called from thread in simulation class
-        private void simulation_update_timer_Tick(object sender, EventArgs e)
+        private void UpdateGraph(StackedAreaSeries m_series, int value)
         {
-            if (counter > 10) { simulation_update_timer.Enabled = false; EndSimulation(); return; }
-            // generate a random value
-
-          //  gMapControl.Overlays.Remove(polyOverlay);
-            UpdateGraph(infected_series);
-            UpdateGraph(susceptable_series);
-            UpdateGraph(recovered_series);
-            DrawConnections();
-            //UpdateGraph(vaccinated_series);
-            counter++;
-        }
-
-
-        private void UpdateGraph(StackedAreaSeries m_series)
-        {
-            int value = rnd.Next(0, 10);
+            //int value = rnd.Next(0, 10);
             m_series.Values.Add(value);
         }
 
-        StackedAreaSeries susceptable_series, infected_series, recovered_series, vaccinated_series = new StackedAreaSeries();
-
+        
         // Testing only, run the dummy simulation
         private void run_simulation_button_Click(object sender, EventArgs e)
         {
@@ -227,36 +295,7 @@ namespace WindowsFormsApp1
 
             simulation_update_timer.Enabled = true;
         }
-
-        GMapOverlay polyOverlay = new GMapOverlay("polygons");
-
-        // Draw a line between each of the connections in the population
-        private void DrawConnections()
-        {
-            gMapControl.Overlays.Remove(polyOverlay);
-            polyOverlay.Clear();
-            int indv = 0;
-            foreach (Individual m_individual in pop.individuals)
-            {
-                int id = 0;
-                foreach (var connection in m_individual.In)
-                {
-                    List<PointLatLng> points = new List<PointLatLng>();
-                    points.Add(new PointLatLng(m_individual.lat, m_individual.lng));
-                    points.Add(new PointLatLng(pop.individuals[connection.id].lat, pop.individuals[connection.id].lng));
-                    GMapPolygon polygon = new GMapPolygon(points, "mypolygon");
-
-                    DColor color = GetColorOfLine(indv, id);
-
-                    polygon.Stroke = new System.Drawing.Pen(color, 0.5f);
-                    polyOverlay.Polygons.Add(polygon);
-                    id++;
-
-                }
-                indv++;
-            }
-            gMapControl.Overlays.Add(polyOverlay);
-        }
+    
 
         private System.Drawing.Color GetColorOfLine(int person_a, int id)
         {
@@ -268,11 +307,6 @@ namespace WindowsFormsApp1
                 return DColor.FromArgb(100, 37, 70, 74);
                 
             }
-        }
-
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void BeginSimulation()

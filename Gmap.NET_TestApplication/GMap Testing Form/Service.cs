@@ -17,6 +17,8 @@
         public Neighbor[] In { get; set; }
         public int[] Out { get; set; }
         public int status = 0;
+        public bool isVaccinated;
+        public bool isRecovered;
 
     }
     public class Neighbor
