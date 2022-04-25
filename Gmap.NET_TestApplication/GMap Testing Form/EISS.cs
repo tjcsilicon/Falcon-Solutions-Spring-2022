@@ -93,6 +93,11 @@ namespace WindowsFormsApp1
             //recipients = vaccinationAssessment.selection;
         }
 
+        public void HandleSimulation()
+        {
+
+        }
+
         // Called on Update(), updates the nodes in the gMap control
         private void HandleMapPopulation()
         {

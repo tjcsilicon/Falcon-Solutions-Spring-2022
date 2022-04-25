@@ -15,9 +15,6 @@ namespace WindowsFormsApp1
     public partial class LoginScreen : Form
     {
 
-        private double _latitude;
-        private double _longitude;
-
         DataReader data;
         RunCheck running_task;
         Login verify;
