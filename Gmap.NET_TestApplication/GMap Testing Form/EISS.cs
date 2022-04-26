@@ -106,7 +106,7 @@ namespace WindowsFormsApp1
         int counter;
         private void OnDummyTimer(object sender, EventArgs e)
         {
-            if (counter > 10) { simulation_update_timer.Enabled = false; EndSimulation(); return; }
+            if (pop.infected.Count == 0) { simulation_update_timer.Enabled = false; EndSimulation(); return; }
             // generate a random value
 
             //  gMapControl.Overlays.Remove(polyOverlay);

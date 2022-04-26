@@ -58,10 +58,10 @@ namespace Firebase.Vaccination
         // The main Update function of the program. It is called every time the simulation ends a cycle
         public void Update()
         {
+            Task.Run(() => HandleGraph());
             gMap.Overlays.Clear();
             HandleMapPopulation();
             HandleMapConnections();
-            Task.Run(() => HandleGraph());
             Refresh();
         }
 
@@ -87,6 +87,9 @@ namespace Firebase.Vaccination
                         break;
                     case 2:
                         img = new Bitmap(WindowsFormsApp1.Properties.Resources.IndividualIcon_Recovered_large, new Size(imgSize, imgSize));
+                        break;
+                    case 3:
+                        img = new Bitmap(WindowsFormsApp1.Properties.Resources.IndividualIcon_Vaccinated_large, new Size(imgSize, imgSize));
                         break;
                 }
                 GMarkerGoogle marker = new GMarkerGoogle(new PointLatLng(individual.lat, individual.lng),
@@ -156,6 +159,7 @@ namespace Firebase.Vaccination
         {
             if (pop.individuals[person_a].In[id].infectTrigger)
             {
+                pop.individuals[person_a].In[id].infectTrigger = false;
                 return System.Drawing.Color.Red;
             }
             else

@@ -218,5 +218,8 @@
   <ItemGroup>
     <None Include="IndividualIcon-Susceptable_large.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="IndividualIcon-Vaccinated_large.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
