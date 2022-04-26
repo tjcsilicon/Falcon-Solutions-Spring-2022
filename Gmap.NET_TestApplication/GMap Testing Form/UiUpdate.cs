@@ -35,6 +35,7 @@ namespace Firebase.Vaccination
             data_graph.Series.Add(infected_series);
             data_graph.Series.Add(recovered_series);
             data_graph.Series.Add(vaccinated_series);
+            HandleGraph();
             Refresh();
         }
 
@@ -58,10 +59,10 @@ namespace Firebase.Vaccination
         // The main Update function of the program. It is called every time the simulation ends a cycle
         public void Update()
         {
-            Task.Run(() => HandleGraph());
             gMap.Overlays.Clear();
             HandleMapPopulation();
             HandleMapConnections();
+            HandleGraph();
             Refresh();
         }
 

@@ -226,7 +226,7 @@
             // 
             // simulation_update_timer
             // 
-            this.simulation_update_timer.Interval = 3000;
+            this.simulation_update_timer.Interval = 1500;
             this.simulation_update_timer.Tick += new System.EventHandler(this.OnDummyTimer);
             // 
             // MainSimulation

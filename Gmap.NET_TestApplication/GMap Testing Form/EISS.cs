@@ -106,7 +106,8 @@ namespace WindowsFormsApp1
         int counter;
         private void OnDummyTimer(object sender, EventArgs e)
         {
-            if (pop.infected.Count == 0) { simulation_update_timer.Enabled = false; EndSimulation(); return; }
+            if (pop.infected.Count == 0) { simulation_update_timer.Enabled = false;
+                EndSimulation(); return; }
             // generate a random value
 
             //  gMapControl.Overlays.Remove(polyOverlay);
@@ -187,6 +188,7 @@ namespace WindowsFormsApp1
             BeginSimulation();
             // for testing reasons, this button just populates the graph.
             run_simulation_button.Enabled = false;
+
             //susceptable_series = new StackedAreaSeries() { DataLabels = true, Values = new ChartValues<int>(), Fill = System.Windows.Media.Brushes.Aqua };
             //infected_series = new StackedAreaSeries() { DataLabels = true, Values = new ChartValues<int>(), Fill = System.Windows.Media.Brushes.DarkRed };
             //recovered_series = new StackedAreaSeries() { DataLabels = true, Values = new ChartValues<int>(), Fill = System.Windows.Media.Brushes.BlueViolet };
@@ -201,6 +203,7 @@ namespace WindowsFormsApp1
             axis.Labels = new List<string>();
 
             simulation_update_timer.Enabled = true;
+            //update.HandleGraph();
         }
     
         private void BeginSimulation()
