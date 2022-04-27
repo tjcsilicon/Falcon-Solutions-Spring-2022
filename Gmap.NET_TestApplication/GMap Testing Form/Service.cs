@@ -21,7 +21,7 @@
         public bool isVaccinated;
         public bool isRecovered;
         public int recovery = 4;
-
+        public int id;
     }
     public class Neighbor
     {

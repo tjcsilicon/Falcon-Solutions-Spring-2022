@@ -27,10 +27,10 @@ namespace Firebase.Vaccination
         {
             HandleMapConnections();
             HandleMapPopulation();
-            susceptable_series = new StackedAreaSeries() { DataLabels = true, Values = new ChartValues<int>(), Fill = System.Windows.Media.Brushes.Aqua };
-            infected_series = new StackedAreaSeries() { DataLabels = true, Values = new ChartValues<int>(), Fill = System.Windows.Media.Brushes.DarkRed };
-            recovered_series = new StackedAreaSeries() { DataLabels = true, Values = new ChartValues<int>(), Fill = System.Windows.Media.Brushes.BlueViolet };
-            vaccinated_series = new StackedAreaSeries() { DataLabels = true, Values = new ChartValues<int>(), Fill = System.Windows.Media.Brushes.LimeGreen };
+            susceptable_series = new StackedAreaSeries() { Title = "Susceptable", DataLabels = true, Values = new ChartValues<int>(), Fill = System.Windows.Media.Brushes.Aqua };
+            infected_series = new StackedAreaSeries() { Title = "Infected", DataLabels = true, Values = new ChartValues<int>(), Fill = System.Windows.Media.Brushes.DarkRed };
+            recovered_series = new StackedAreaSeries() { Title = "Recovered", DataLabels = true, Values = new ChartValues<int>(), Fill = System.Windows.Media.Brushes.BlueViolet };
+            vaccinated_series = new StackedAreaSeries() { Title = "Vaccinated", DataLabels = true, Values = new ChartValues<int>(), Fill = System.Windows.Media.Brushes.LimeGreen };
             data_graph.Series.Add(susceptable_series);
             data_graph.Series.Add(infected_series);
             data_graph.Series.Add(recovered_series);

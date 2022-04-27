@@ -41,13 +41,15 @@
                 }
 
             }
-
+            int c = 0;
             foreach(var person in PopulationData.individuals)
             {
                 if (person.status == 1)
                 {
                     PopulationData.infected.Add(person);
                 }
+                person.id = c;
+                c++;
             }
            
             population_dataset = PopulationData;

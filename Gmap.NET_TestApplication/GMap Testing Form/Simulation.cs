@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Firebase.Vaccination;
+using WindowsFormsApp1;
 
 class Simulation
 {
@@ -16,14 +17,15 @@ class Simulation
     {
         pop = population;
         main = update;
-        pop.individuals[4].status = 1;
-        pop.infected.Add(pop.individuals[4]);
     }
+
+    MainSimulation s_;
 
     public List<Individual> tempList = new List<Individual>();
 
-    public void Run()
+    public void Run(MainSimulation s)
     {
+        s_ = s;
         tempList = new List<Individual>(pop.infected);
         //tempList = pop.infected;
         int a = 0;
@@ -77,8 +79,10 @@ class Simulation
                 n.infectTrigger = true;
             }
         }
+        s_.Log("Threshold: " + thresh + "   |>|    " + pop.individuals[id].t);
         if (thresh > pop.individuals[id].t)
         {
+
             pop.individuals[id].status = 1;
             tempList.Add(pop.individuals[id]);
         }

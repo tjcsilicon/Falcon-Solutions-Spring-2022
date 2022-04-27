@@ -24,27 +24,9 @@ namespace Firebase.Login
         // On fail it will display a message
         public async Task HandleLogin(string userName, string pass)
         {
-            hasReturned = false;
-            hasSent = false;
 
-            //            var client = new FirebaseClient("https://cpts323battle.firebaseio.com/");
-            //            var child = client.Child("login");
-            //            var observable = child.AsObservable<InboundMessage>();
-            //            var subscription = observable {
-            //                // wait to hear back from the server
-            //                }
-            //            );
-            //            while (true)
-            //            {
-            //                var message = Console.ReadLine();
-            //                if (!hasSent)
-            //                {
-            //                    await child.PostAsync(new MessageBase { Author = userName, Content = pass });
-            //                    hasSent = true;
-            //                }
-            //            }
-            //            subscription.Dispose();
-            hasReturned = true;
+            //hasReturned = true;
+            if (userName == "" || pass == "") return;
             message = "V";
 
         }

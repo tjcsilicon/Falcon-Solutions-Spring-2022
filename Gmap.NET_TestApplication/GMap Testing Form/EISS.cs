@@ -46,6 +46,7 @@ namespace WindowsFormsApp1
 
         Simulation simulation;
 
+        public int timerUpdateTime = 2000;
 
         // Constructor
         public MainSimulation(DataReader _dataset, ref RunCheck _check) {
@@ -62,6 +63,8 @@ namespace WindowsFormsApp1
             Log("GMap Interface has been populated with nodes");
             //HandleMapConnections();
             Log("Gmap interface Nodes have had connections drawn");
+
+            simulation_update_timer.Interval = timerUpdateTime;
             
         }
 
@@ -72,8 +75,8 @@ namespace WindowsFormsApp1
         // Called on initialization, sets the best fit individuals for vaccines
         public void HandleVaccines()
         {
-            VaccinationAssessment vaccinationAssessment = new VaccinationAssessment(pop);
-            vaccinationAssessment.ApplyVaccinations(3);
+            VaccinationAssessment vaccinationAssessment = new VaccinationAssessment(this);
+            vaccinationAssessment.ApplyVaccinations(pop);
             //recipients = vaccinationAssessment.selection;
         }
 
@@ -119,7 +122,7 @@ namespace WindowsFormsApp1
             //HandleMapConnections();
             //HandleGraph();
             //UpdateGraph(vaccinated_series);
-            simulation.Run();            
+            simulation.Run(this);            
             counter++;
         }
 
