@@ -26,6 +26,16 @@ namespace WindowsFormsApp1
             running_task = task;
 
             InitializeComponent();
+            WaitForLogin(beginButton);
+        }
+
+        void WaitForLogin(Button b)
+        {
+            while(!data.isReady)
+            {
+                b.Enabled = false;
+            }
+            b.Enabled = true;
         }
 
         private void BeginButton_Click(object sender, EventArgs e)

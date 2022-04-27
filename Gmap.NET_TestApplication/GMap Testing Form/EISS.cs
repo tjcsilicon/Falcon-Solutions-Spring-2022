@@ -73,6 +73,7 @@ namespace WindowsFormsApp1
         public void HandleVaccines()
         {
             VaccinationAssessment vaccinationAssessment = new VaccinationAssessment(pop);
+            vaccinationAssessment.ApplyVaccinations(3);
             //recipients = vaccinationAssessment.selection;
         }
 
@@ -91,6 +92,7 @@ namespace WindowsFormsApp1
             gMapControl.Zoom = 13;
             gMapControl.Position = new GMap.NET.PointLatLng(_latitude, _longitude);
             Log("EISS initialized");
+            HandleVaccines();
             update = new UiUpdate(ref gMapControl, ref pop, data_graph);
             update.Initialize();
         }

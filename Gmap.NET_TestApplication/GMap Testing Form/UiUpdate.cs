@@ -161,7 +161,12 @@ namespace Firebase.Vaccination
             if (pop.individuals[person_a].In[id].infectTrigger)
             {
                 pop.individuals[person_a].In[id].infectTrigger = false;
+                pop.individuals[person_a].In[id].wasInfect = true;
                 return System.Drawing.Color.Red;
+            }
+            else if(pop.individuals[person_a].In[id].wasInfect)
+            {
+                return DColor.FromArgb(15, 37, 70, 74);
             }
             else
             {

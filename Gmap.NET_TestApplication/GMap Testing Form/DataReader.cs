@@ -12,7 +12,7 @@
     public class DataReader
     {
         public Population population_dataset;
-
+        public bool isReady = false;
         public async Task Run()
         {
             //******************** Initialization ***************************//
@@ -51,6 +51,7 @@
             }
            
             population_dataset = PopulationData;
+            isReady = true;
         }
     }
 

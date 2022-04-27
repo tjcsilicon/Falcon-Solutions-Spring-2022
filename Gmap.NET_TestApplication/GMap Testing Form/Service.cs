@@ -28,6 +28,7 @@
         public int id;
         public double w;
         public bool infectTrigger; // turn this bool to true when one neighbor infects another, is used by the UI to visualize the transmission of the infection
+        public bool wasInfect = false;
     }
 
 }

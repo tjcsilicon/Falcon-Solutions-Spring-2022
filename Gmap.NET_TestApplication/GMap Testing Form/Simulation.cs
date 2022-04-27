@@ -16,61 +16,8 @@ class Simulation
     {
         pop = population;
         main = update;
-        bestFit();
-        pop.individuals[21].status = 1;
-        pop.infected.Add(pop.individuals[21]);
-    }
-
-    int compareOut(Individual i, Individual j)
-    {
-        if (i.Out.Length > j.Out.Length )
-    {
-            return 1;
-        }
-    else if (i.Out.Length == j.Out.Length )
-    {
-            return 0;
-        }
-    else
-        {
-            return 1;
-        }
-    }
-
-    int compareIn(Individual i, Individual j)
-    {
-        if (i.In.Length > j.In.Length)
-        {
-            return 1;
-        }
-    else if (i.In.Length == j.In.Length)
-        {
-            return 0;
-        }
-    else
-        {
-            return 1;
-        }
-    }
-
-    void bestFit()
-    {
-        int k = 3;
-        List<Individual> l = new List<Individual>(pop.individuals);
-        l.Sort(compareOut); //sorts by outgoing
-        List<Individual> b = new List<Individual>();
-        for (int i = 0; i < l.Count; i++) //adds k of the most outgoing individuals to new list
-        {
-            b.Add(l[i]);
-
-        }
-        b.Sort(compareIn); //sorts newList by most In
-
-
-        for (int i = 0; i < k; i++) // changes vaccination status of best fits
-        {
-            b[i].isVaccinated = true;
-        }
+        pop.individuals[4].status = 1;
+        pop.infected.Add(pop.individuals[4]);
     }
 
     public List<Individual> tempList = new List<Individual>();
