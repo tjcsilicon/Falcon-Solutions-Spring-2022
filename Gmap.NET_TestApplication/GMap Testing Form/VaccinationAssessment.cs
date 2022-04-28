@@ -20,7 +20,7 @@ public class VaccinationAssessment
 
     int compareOut(Individual i, Individual j)
     {
-        if (i.Out.Length * i.t + i.In.Length > j.Out.Length * j.t + j.In.Length)
+        if (i.Out.Length > j.Out.Length)
         {
             return 1;
         }
@@ -36,7 +36,7 @@ public class VaccinationAssessment
 
     int compareIn(Individual i, Individual j)
     {
-        if (i.In.Length * i.t > j.In.Length * j.t)
+        if (i.In.Length > j.In.Length )
         {
             return 1;
         }
@@ -57,7 +57,6 @@ public class VaccinationAssessment
         List<Individual> c = new List<Individual>(pop.individuals);
         Individual[] arr = pop.individuals.ToArray<Individual>();
         int k = pop.K;
-        k = 3;
         l.Sort(compareOut); //sorts by outgoing
         List<Individual> b = new List<Individual>();
         for (int i = 0; i < l.Count; i++) //adds k of the most outgoing individuals to new list
@@ -100,6 +99,7 @@ public class VaccinationAssessment
         var data = Newtonsoft.Json.JsonConvert.DeserializeObject<Response>(responseString);
         Console.WriteLine(data.received);
         int i = 0;
+        _s.Log(data.received);
         foreach (var infec in data.infected)
         {
             Console.WriteLine($"infec: {i}->{infec} ");
